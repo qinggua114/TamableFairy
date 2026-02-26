@@ -1,12 +1,10 @@
 package com.github.qinggua114.tamablefairy.events;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
-import com.github.qinggua114.tamablefairy.entity_ai.ModifyAI;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -17,12 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
-import static com.machinezoo.noexception.Exceptions.log;
+import static com.github.qinggua114.tamablefairy.entity_ai.ModifyAI.letTamed;
 
 @EventBusSubscriber
 public class TameHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(TameHandler.class);
+    //private static final Logger log = LoggerFactory.getLogger(TameHandler.class);
     private static final Logger LOGGER = LogUtils.getLogger();
 
     @SubscribeEvent
@@ -39,7 +37,7 @@ public class TameHandler {
                 TameData newData = new TameData(true, player.getUUID());
                 target.setData(TAME_DATA, newData);
                 itemStack.shrink(1);
-                ModifyAI.letTamed((Mob) target, player);
+                letTamed((Mob) target);
             }
         }
     }
