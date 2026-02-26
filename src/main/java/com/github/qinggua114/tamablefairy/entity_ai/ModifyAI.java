@@ -15,7 +15,6 @@ public class ModifyAI {
         //删除原有目标选择器
         for (WrappedGoal goal : fairy.targetSelector.getAvailableGoals()) {
             fairy.targetSelector.removeGoal(goal.getGoal());
-            LOGGER.info(goal.getGoal().getClass().getSimpleName());
         }
         fairy.setTarget(null);
 

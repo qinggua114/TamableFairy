@@ -12,7 +12,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 import static com.github.qinggua114.tamablefairy.entity_ai.ModifyAI.letTamed;
@@ -20,7 +19,6 @@ import static com.github.qinggua114.tamablefairy.entity_ai.ModifyAI.letTamed;
 @EventBusSubscriber
 public class TameHandler {
 
-    //private static final Logger log = LoggerFactory.getLogger(TameHandler.class);
     private static final Logger LOGGER = LogUtils.getLogger();
 
     @SubscribeEvent

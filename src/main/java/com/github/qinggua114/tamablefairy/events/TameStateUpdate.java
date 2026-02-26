@@ -12,19 +12,16 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import org.slf4j.Logger;
 
-import java.util.UUID;
 
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 
 @EventBusSubscriber
 public class TameStateUpdate {
-    public TameStateUpdate(){}
-
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public TameStateUpdate(){
+    }
 
     @SubscribeEvent
-    public static void onJoinLevel(EntityJoinLevelEvent event){
-        LOGGER.info("===========================================");
+    public static void onJoinLevel( EntityJoinLevelEvent event){
         Entity entity = event.getEntity();
         Level level = event.getLevel();
         if(level.isClientSide) return;
