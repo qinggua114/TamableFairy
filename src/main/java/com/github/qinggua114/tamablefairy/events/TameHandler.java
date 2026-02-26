@@ -1,9 +1,11 @@
 package com.github.qinggua114.tamablefairy.events;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.entity_ai.ModifyAI;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,13 +34,12 @@ public class TameHandler {
         ItemStack itemStack = event.getItemStack();
         TameData tameData = target.getData(TAME_DATA);
 
-        LOGGER.info(String.valueOf(tameData));
         if(target instanceof EntityFairy && !tameData.tamed()){
             if (event.getItemStack().is(Items.CAKE)){
                 TameData newData = new TameData(true, player.getUUID());
                 target.setData(TAME_DATA, newData);
                 itemStack.shrink(1);
-                //LOGGER.info(String.valueOf(newData));
+                ModifyAI.letTamed((Mob) target, player);
             }
         }
     }

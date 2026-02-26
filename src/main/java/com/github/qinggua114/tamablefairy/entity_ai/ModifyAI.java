@@ -1,6 +1,9 @@
 package com.github.qinggua114.tamablefairy.entity_ai;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
+import com.mojang.logging.LogUtils;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
@@ -8,6 +11,7 @@ import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
 import net.minecraft.world.entity.player.Player;
+import org.slf4j.Logger;
 
 import java.util.UUID;
 
@@ -17,11 +21,16 @@ public class ModifyAI {
     public ModifyAI(){
     }
 
+    private static final Logger LOGGER = LogUtils.getLogger();
+
     public static void letTamed(Mob fairy, Player owner){
         //删除原有目标选择器
         for (WrappedGoal goal : fairy.targetSelector.getAvailableGoals()) {
-            fairy.targetSelector.removeGoal(goal);
+            fairy.targetSelector.removeGoal(goal.getGoal());
+            LOGGER.info(goal.getGoal().getClass().getSimpleName());
         }
+
+        fairy.setTarget(null);
 
         if (owner != null) {
             TameData tameData = fairy.getData(TAME_DATA);
