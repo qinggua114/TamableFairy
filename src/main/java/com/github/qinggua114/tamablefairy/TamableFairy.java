@@ -1,5 +1,6 @@
 package com.github.qinggua114.tamablefairy;
 
+import com.github.qinggua114.tamablefairy.data.Attachments;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,7 +44,8 @@ public class TamableFairy {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public TamableFairy(IEventBus modbus){
+    public TamableFairy(IEventBus modBus){
         NeoForge.EVENT_BUS.addListener(TestEvent::onJump);
+        Attachments.register(modBus);
     }
 }
