@@ -8,6 +8,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModifyAI {
     public ModifyAI(){
     }
@@ -16,8 +19,11 @@ public class ModifyAI {
 
     public static void letTamed(Mob fairy){
         //删除原有目标选择器
-        for (WrappedGoal goal : fairy.targetSelector.getAvailableGoals()) {
-            fairy.targetSelector.removeGoal(goal.getGoal());
+        List<WrappedGoal> goals = new ArrayList<>(fairy.targetSelector.getAvailableGoals());
+        for (WrappedGoal goal : goals) {
+            if (goal != null) {
+                fairy.targetSelector.removeGoal(goal.getGoal());
+            }
         }
         fairy.setTarget(null);
 
