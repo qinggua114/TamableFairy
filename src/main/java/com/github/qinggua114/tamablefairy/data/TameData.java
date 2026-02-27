@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -23,7 +24,7 @@ public record TameData (boolean tamed, UUID owner){
     //网络同步
     public static final StreamCodec<ByteBuf, TameData> STREAM_CODEC = new StreamCodec<>() {
         @Override
-        public TameData decode(ByteBuf byteBuf) {
+        public @NotNull TameData decode(@NotNull ByteBuf byteBuf) {
             boolean tamed = ByteBufCodecs.BOOL.decode(byteBuf);
             UUID owner = null;
             if(tamed){
@@ -35,7 +36,7 @@ public record TameData (boolean tamed, UUID owner){
             return new TameData(tamed, owner);
         }
         @Override
-        public void encode(ByteBuf byteBuf, TameData tameData) {
+        public void encode(@NotNull ByteBuf byteBuf, TameData tameData) {
             ByteBufCodecs.BOOL.encode(byteBuf, tameData.tamed());
             if(tameData.tamed()){
                 //将UUID拆成最高有效位和最低有效位,作为两个Long类型数据分别传输

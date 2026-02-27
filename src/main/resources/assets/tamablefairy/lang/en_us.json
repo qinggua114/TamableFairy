@@ -1,5 +1,4 @@
 {
-  "itemGroup.tamablefairy": "Example Mod Tab",
-  "block.tamablefairy.example_block": "Example Block",
-  "item.tamablefairy.example_item": "Example Item"
+  "message.on_tamed_fairy_death": "%1s was killed by %2s",
+  "message.on_tamed_fairy_death.without_killer": "%1s was killed"
 }

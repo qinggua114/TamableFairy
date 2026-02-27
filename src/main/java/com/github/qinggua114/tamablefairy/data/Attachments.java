@@ -1,7 +1,7 @@
 package com.github.qinggua114.tamablefairy.data;
 
 import com.github.qinggua114.tamablefairy.TamableFairy;
-import com.google.common.eventbus.EventBus;
+//import com.google.common.eventbus.EventBus;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
