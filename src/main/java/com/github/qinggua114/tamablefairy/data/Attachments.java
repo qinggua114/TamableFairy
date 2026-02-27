@@ -18,7 +18,7 @@ public class Attachments {
             ATTACHMENT_TYPES.register("tame_data",
                     () -> AttachmentType.builder(() -> TameData.EMPTY)
                             .serialize(TameData.CODEC)
-                            .sync(TameData.STREAM_CODEC)
+                            /*.sync(TameData.STREAM_CODEC)*/
                             .build()
             );
     public static void register(IEventBus modBus){

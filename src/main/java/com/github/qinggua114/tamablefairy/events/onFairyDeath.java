@@ -30,7 +30,15 @@ public class onFairyDeath {
         if(owner == null) return;
 
         if(entity.getKillCredit() == null)
-            owner.sendSystemMessage(Component.translatable("message.on_tamed_fairy_death_without_killer", entity.getDisplayName()));
-        else owner.sendSystemMessage(Component.translatable("message.on_tamed_fairy_death", entity.getDisplayName(), entity.getKillCredit().getDisplayName()));
+            owner.sendSystemMessage(Component.translatable(
+                    "message.on_tamed_fairy_death.without_killer",
+                    entity.getDisplayName().getString())
+            );
+        else
+            owner.sendSystemMessage(Component.translatable(
+                    "message.on_tamed_fairy_death",
+                    entity.getDisplayName().getString(),
+                    entity.getKillCredit().getDisplayName().getString())
+            );
     }
 }

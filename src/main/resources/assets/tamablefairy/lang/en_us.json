@@ -1,4 +1,4 @@
 {
-  "message.on_tamed_fairy_death": "%1s was killed by %2s",
-  "message.on_tamed_fairy_death.without_killer": "%1s was killed"
+  "message.on_tamed_fairy_death": "%s was killed by %s",
+  "message.on_tamed_fairy_death.without_killer": "%s was killed"
 }

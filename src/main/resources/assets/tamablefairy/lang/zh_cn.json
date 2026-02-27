@@ -1,4 +1,4 @@
 {
-  "message.on_tamed_fairy_death": "%1s 被 %2s 杀死了",
-  "message.on_tamed_fairy_death.without_killer": "%1s 被杀死了"
+  "message.on_tamed_fairy_death": "%s 被 %s 杀死了",
+  "message.on_tamed_fairy_death.without_killer": "%s 被杀死了"
 }
