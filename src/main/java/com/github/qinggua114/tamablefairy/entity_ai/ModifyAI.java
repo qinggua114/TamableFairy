@@ -15,7 +15,6 @@ public class ModifyAI {
     public ModifyAI(){
     }
 
-    //private static final Logger LOGGER = LogUtils.getLogger();
 
     public static void letTamed(Mob fairy){
         //删除原有目标选择器
@@ -28,17 +27,21 @@ public class ModifyAI {
         fairy.setTarget(null);
 
         //跟随主人
-        fairy.goalSelector.addGoal(2, new CustomFollowOwnerGoal(fairy, 1, 5, 3, true, 16));
+        fairy.goalSelector.addGoal(4, new CustomFollowOwnerGoal(fairy, 1, 5, 3, true, 16));
 
         //攻击主人的目标
-        fairy.targetSelector.addGoal(1,new CustomOwnerHurtByTargetGoal(fairy));
+        fairy.targetSelector.addGoal(1, new CustomOwnerHurtByTargetGoal(fairy));
         fairy.targetSelector.addGoal(2, new CustomOwnerHurtTargetGoal(fairy));
 
         //更改属性,稍微加强一点,要不太不抗揍了
-        AttributeInstance maxHealth = fairy.getAttribute(Attributes.MAX_HEALTH);
-        if(maxHealth != null) maxHealth.setBaseValue(20);
+        AttributeInstance maxHealth = fairy.getAttribute(Attributes.ARMOR);
+        if(maxHealth != null) maxHealth.setBaseValue(5);
+        //AttributeInstance attackDamage = fairy.getAttribute(Attributes.ATTACK_DAMAGE);
+        //if(attackDamage != null) attackDamage.setBaseValue(1145);弹幕伤害是硬编码的,不能通过属性修改(悲)(才不是我懒得Mixin!)
         AttributeInstance flyingSpeed = fairy.getAttribute(Attributes.FLYING_SPEED);
-        if(flyingSpeed != null) flyingSpeed.setBaseValue(0.6);
+        if(flyingSpeed != null) flyingSpeed.setBaseValue(0.7);
+        AttributeInstance movementSpeed = fairy.getAttribute(Attributes.MOVEMENT_SPEED);
+        if(movementSpeed != null) movementSpeed.setBaseValue(0.5);
     }
 
 }

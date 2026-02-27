@@ -3,7 +3,6 @@ package com.github.qinggua114.tamablefairy.events;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.ModifyAI;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
-//import com.mojang.logging.LogUtils;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -15,14 +14,12 @@ import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-//import org.slf4j.Logger;
 
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 
 @EventBusSubscriber
 public class TameHandler {
 
-    //private static final Logger LOGGER = LogUtils.getLogger();
     private static Entity target;
 
     @SubscribeEvent

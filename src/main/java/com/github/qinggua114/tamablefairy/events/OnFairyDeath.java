@@ -12,8 +12,8 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 
 @EventBusSubscriber
-public class onFairyDeath {
-    public onFairyDeath(){
+public class OnFairyDeath {
+    public OnFairyDeath(){
     }
 
     @SubscribeEvent

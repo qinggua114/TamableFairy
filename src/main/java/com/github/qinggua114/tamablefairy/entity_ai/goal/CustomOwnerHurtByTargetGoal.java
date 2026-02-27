@@ -1,6 +1,5 @@
 package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
-//import com.github.qinggua114.tamablefairy.data.TameData;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;

@@ -1,11 +1,9 @@
 package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
-//import com.mojang.logging.LogUtils;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
-//import org.slf4j.Logger;
 import java.util.EnumSet;
 import java.util.UUID;
 
@@ -20,7 +18,6 @@ public class CustomFollowOwnerGoal extends Goal {
     private final boolean enableTeleport;
     private Player owner = null;
     private int timeToRePathing;
-    //private static final Logger LOGGER = LogUtils.getLogger();
 
     public CustomFollowOwnerGoal(Mob mob, double speedModifier, float startDistance, float stopDistance, boolean enableTeleport, float teleportDistance) {
         this.mob = mob;
