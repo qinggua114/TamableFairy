@@ -1,5 +1,7 @@
 # TamableFairy
 
+[![Image](https://cdn.modrinth.com/data/4EAV6XSC/images/72d1aa45d3f7f670a43cb9db292c4119645e49b8.png)]()
+
 [简体中文](README.md)  
 [English](README_en.md)
 
