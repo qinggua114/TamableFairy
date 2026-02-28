@@ -1,5 +1,8 @@
 # TamableFairy
 
+[简体中文](README.md)  
+[English](README_en.md)
+
 [![NeoForge](https://img.shields.io/badge/NeoForge-21.1-blue.svg)](https://neoforged.net/)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-brightgreen.svg)](https://minecraft.net)
 [![Touhou Little Maid](https://img.shields.io/badge/Touhou%20Little%20Maid-依赖-orange)](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid)
@@ -32,7 +35,7 @@
     - `CustomOwnerHurtTargetGoal` – 攻击主人正在攻击的生物（包含主人检查，避免攻击同主的妖精）。
     - 并添加一个自定义行为 `CustomFollowOwnerGoal` – 跟随主人，距离过远时传送。
 - **事件处理**：
-    - `AvoidBeingTargeted` – 防止怪物和铁傀儡将驯服妖精设为攻击目标。
+    - `AvoidBeingTargeted` – 防止铁傀儡等将驯服妖精设为攻击目标。
     - `IgnoreDamage` – 如果伤害来源和目标都是同一主人的女仆妖精，则取消伤害，防止撞到自己人的弹幕趋势。
     - `InteractEvents` – 治疗等互动事件。
     - `TameHandler` - 处理驯服事件
@@ -61,6 +64,7 @@
 ## 贡献
 
 欢迎提交 Issue 或 Pull Request！
+如果你有什么好点子希望实现，也欢迎提交到Issue！
 
 ---
 
