@@ -27,7 +27,7 @@ public class ModifyAI {
         fairy.setTarget(null);
 
         //跟随主人
-        fairy.goalSelector.addGoal(4, new CustomFollowOwnerGoal(fairy, 1, 5, 3, true, 16));
+        fairy.goalSelector.addGoal(1, new CustomFollowOwnerGoal(fairy, 1, 5, 3, true, 16));
 
         //攻击主人的目标
         fairy.targetSelector.addGoal(1, new CustomOwnerHurtByTargetGoal(fairy));

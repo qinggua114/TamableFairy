@@ -39,8 +39,9 @@ public class CustomFollowOwnerGoal extends Goal {
         if (!tameData.tamed()) return false;
         UUID ownerUUID = tameData.owner();
         if (ownerUUID == null) return false;
-        this.owner = mob.level().getPlayerByUUID(ownerUUID);
+        owner = mob.level().getPlayerByUUID(ownerUUID);
         if (owner == null) return false;
+        if(!( owner.level().equals(mob.level()) )) return false;
 
         return mob.distanceToSqr(owner) > startDistance * startDistance;//距离大于startDistance时自动跟随
 
@@ -48,6 +49,7 @@ public class CustomFollowOwnerGoal extends Goal {
 
     @Override
     public boolean canContinueToUse(){
+        if(!( owner.level().equals(mob.level()) )) return false;//不在同一维度则结束跟随
         return owner != null && mob.distanceToSqr(owner) > stopDistance * stopDistance;//owner不为null且距离大于stopDistance时继续跟随
     }
 
@@ -58,7 +60,7 @@ public class CustomFollowOwnerGoal extends Goal {
 
     @Override
     public void stop(){
-        this.owner = null;
+        owner = null;
         mob.getNavigation().stop();
     }
 
