@@ -1,7 +1,7 @@
 # TamableFairy
 
-[![NeoForge](https://img.shields.io/badge/NeoForge-21.0+-blue.svg)](https://neoforged.net/)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21+-brightgreen.svg)](https://minecraft.net)
+[![NeoForge](https://img.shields.io/badge/NeoForge-21.1-blue.svg)](https://neoforged.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-brightgreen.svg)](https://minecraft.net)
 [![Touhou Little Maid](https://img.shields.io/badge/Touhou%20Little%20Maid-依赖-orange)](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid)
 
 这是一个 [Touhou Little Maid](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid) 的扩展模组，允许你驯服模组中的女仆妖精。
