@@ -1,5 +1,7 @@
 package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
+import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -30,7 +32,10 @@ public class CustomOwnerHurtTargetGoal extends TargetGoal {
         lastHurt = owner.getLastHurtMob();
         if (lastHurt == null) return false;
 
-        return lastHurt != mob && !(lastHurt instanceof EntityMaid) &&  lastHurt.isAlive();//确保lastHurt不是自己,且未死亡
+        TameData targetData = lastHurt.getData(TAME_DATA);
+        if(targetData.owner().equals(ownerUUID)) return false;//同一个主人的女仆妖精不会内斗
+
+        return lastHurt != mob && !(lastHurt instanceof EntityMaid) &&  lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
     }
 
     @Override
