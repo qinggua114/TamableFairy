@@ -23,12 +23,12 @@ public class CustomOwnerHurtTargetGoal extends TargetGoal {
     @Override
     public boolean canUse(){
         UUID ownerUUID = mob.getData(TAME_DATA).owner();
-        if(ownerUUID == null) return false;
+        if (ownerUUID == null) return false;
         Player owner = mob.level().getPlayerByUUID(ownerUUID);
-        if(owner == null) return false;
+        if (owner == null) return false;
 
         lastHurt = owner.getLastHurtMob();
-        if(lastHurt == null) return false;
+        if (lastHurt == null) return false;
 
         return lastHurt != mob && !(lastHurt instanceof EntityMaid) &&  lastHurt.isAlive();//确保lastHurt不是自己,且未死亡
     }

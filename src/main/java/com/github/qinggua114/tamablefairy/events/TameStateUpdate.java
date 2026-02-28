@@ -9,7 +9,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 
-
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 
 @EventBusSubscriber
@@ -20,11 +19,11 @@ public class TameStateUpdate {
     @SubscribeEvent
     public static void onJoinLevel( EntityJoinLevelEvent event){
         Entity entity = event.getEntity();
-        if(event.getLevel().isClientSide) return;
-        if(!(entity instanceof EntityFairy)) return;
+        if (event.getLevel().isClientSide) return;
+        if (!(entity instanceof EntityFairy)) return;
 
         TameData tameData = entity.getData(TAME_DATA);
-        if(tameData.tamed()){
+        if (tameData.tamed()){
             ModifyAI.letTamed((Mob) entity);
         }
 

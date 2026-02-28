@@ -2,8 +2,10 @@ package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
+
 import java.util.EnumSet;
 import java.util.UUID;
 
@@ -21,7 +23,7 @@ public class CustomFollowOwnerGoal extends Goal {
 
     public CustomFollowOwnerGoal(Mob mob, double speedModifier, float startDistance, float stopDistance, boolean enableTeleport, float teleportDistance) {
         this.mob = mob;
-        if(speedModifier == -1) this.speed = mob.getSpeed();//当speedModifier为-1时,使用生物当前默认速度
+        if (speedModifier == -1) this.speed = mob.getAttributeBaseValue(Attributes.MOVEMENT_SPEED);//当speedModifier为-1时,使用生物默认速度
         else this.speed = speedModifier;//否则修改速度为speedModifier;
         this.startDistance = startDistance;
         this.stopDistance = stopDistance;
@@ -34,11 +36,11 @@ public class CustomFollowOwnerGoal extends Goal {
     public boolean canUse(){
         //检查null值和驯服状态
         TameData tameData = mob.getData(TAME_DATA);
-        if(!tameData.tamed()) return false;
+        if (!tameData.tamed()) return false;
         UUID ownerUUID = tameData.owner();
-        if(ownerUUID == null) return false;
+        if (ownerUUID == null) return false;
         this.owner = mob.level().getPlayerByUUID(ownerUUID);
-        if(owner == null) return false;
+        if (owner == null) return false;
 
         return mob.distanceToSqr(owner) > startDistance * startDistance;//距离大于startDistance时自动跟随
 
@@ -62,10 +64,10 @@ public class CustomFollowOwnerGoal extends Goal {
 
     @Override
     public void tick(){
-        if(mob.distanceToSqr(owner) > teleportDistance * teleportDistance && enableTeleport)
+        if (mob.distanceToSqr(owner) > teleportDistance * teleportDistance && enableTeleport)
             mob.teleportTo(owner.getX(), owner.getY(), owner.getZ());//若启用teleport,与主人的距离超过teleportDistance时将生物传送至主人处
         //定时重新寻路
-        if(--timeToRePathing <= 0){
+        if (--timeToRePathing <= 0){
             timeToRePathing = 10;
             mob.getNavigation().moveTo(owner, speed);
         }

@@ -19,13 +19,13 @@ public class OnFairyDeath {
     @SubscribeEvent
     public static void onDeathEvent(LivingDeathEvent event){
         LivingEntity entity = event.getEntity();
-        if(entity.level().isClientSide()) return;
-        if(!(entity instanceof EntityFairy)) return;
+        if (entity.level().isClientSide()) return;
+        if (!(entity instanceof EntityFairy)) return;
 
         TameData tameData = entity.getData(TAME_DATA);
-        if(!tameData.tamed()) return;
+        if (!tameData.tamed()) return;
         ServerPlayer owner = (ServerPlayer) entity.level().getPlayerByUUID(tameData.owner());
-        if(owner == null) return;
+        if (owner == null) return;
 
         if(entity.getKillCredit() == null)
             owner.sendSystemMessage(Component.translatable(
