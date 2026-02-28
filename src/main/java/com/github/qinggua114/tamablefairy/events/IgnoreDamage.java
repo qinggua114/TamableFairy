@@ -14,7 +14,6 @@ import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 @EventBusSubscriber
 public class IgnoreDamage {
 
-    private static final Logger LOGGER = LogUtils.getLogger();
     public IgnoreDamage(){
     }
 
