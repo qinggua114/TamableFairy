@@ -1,17 +1,19 @@
 package com.github.qinggua114.tamablefairy.events;
 
+import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
-import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
-@EventBusSubscriber
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class OnFairyDeath {
     public OnFairyDeath(){
     }
@@ -22,7 +24,7 @@ public class OnFairyDeath {
         if (entity.level().isClientSide()) return;
         if (!(entity instanceof EntityFairy)) return;
 
-        TameData tameData = entity.getData(TAME_DATA);
+        ITameData tameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!tameData.tamed()) return;
         ServerPlayer owner = (ServerPlayer) entity.level().getPlayerByUUID(tameData.owner());
         if (owner == null) return;

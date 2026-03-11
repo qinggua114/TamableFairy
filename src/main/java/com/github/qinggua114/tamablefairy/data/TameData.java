@@ -1,13 +1,7 @@
 package com.github.qinggua114.tamablefairy.data;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Optional;
 import java.util.UUID;
 
 public class TameData implements ITameData, INBTSerializable<CompoundTag> {

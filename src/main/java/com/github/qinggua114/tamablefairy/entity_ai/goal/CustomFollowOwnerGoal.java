@@ -1,5 +1,6 @@
 package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
+import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -9,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.EnumSet;
 import java.util.UUID;
 
-import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 public class CustomFollowOwnerGoal extends Goal {
     private final Mob mob;
@@ -35,7 +36,7 @@ public class CustomFollowOwnerGoal extends Goal {
     @Override
     public boolean canUse(){
         //检查null值和驯服状态
-        TameData tameData = mob.getData(TAME_DATA);
+        ITameData tameData = mob.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!tameData.tamed()) return false;
         UUID ownerUUID = tameData.owner();
         if (ownerUUID == null) return false;

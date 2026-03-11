@@ -38,10 +38,10 @@ public class ModifyAI {
         if (maxHealth != null) maxHealth.setBaseValue(5);
         //AttributeInstance attackDamage = fairy.getAttribute(Attributes.ATTACK_DAMAGE);
         //if(attackDamage != null) attackDamage.setBaseValue(1145);弹幕伤害是硬编码的,不能通过属性修改(悲)(才不是我懒得Mixin!)
-        AttributeInstance flyingSpeed = fairy.getAttribute(Attributes.FLYING_SPEED);
-        if (flyingSpeed != null) flyingSpeed.setBaseValue(0.7);
-        AttributeInstance movementSpeed = fairy.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (movementSpeed != null) movementSpeed.setBaseValue(0.5);
+        //AttributeInstance flyingSpeed = fairy.getAttribute(Attributes.FLYING_SPEED);
+        //if (flyingSpeed != null) flyingSpeed.setBaseValue(0.7);
+        //AttributeInstance movementSpeed = fairy.getAttribute(Attributes.MOVEMENT_SPEED);
+        //if (movementSpeed != null) movementSpeed.setBaseValue(0.5);
     }
 
 }

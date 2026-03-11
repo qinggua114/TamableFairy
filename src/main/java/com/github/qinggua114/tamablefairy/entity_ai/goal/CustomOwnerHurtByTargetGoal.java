@@ -1,5 +1,6 @@
 package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
+import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
@@ -11,7 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.EnumSet;
 import java.util.UUID;
 
-import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 public class CustomOwnerHurtByTargetGoal extends TargetGoal {
 
@@ -24,7 +25,8 @@ public class CustomOwnerHurtByTargetGoal extends TargetGoal {
 
     @Override
     public boolean canUse(){
-        UUID ownerUUID = mob.getData(TAME_DATA).owner();
+        ITameData tameData = mob.getCapability(TAME_DATA, null).orElse(new TameData());
+        UUID ownerUUID = tameData.owner();
         if (ownerUUID == null) return false;
         Player owner = mob.level().getPlayerByUUID(ownerUUID);
         if (owner == null) return false;
@@ -33,7 +35,7 @@ public class CustomOwnerHurtByTargetGoal extends TargetGoal {
         if (lastHurtBy == null) return false;
 
         if(lastHurtBy instanceof EntityFairy){
-            TameData targetData = lastHurtBy.getData(TAME_DATA);
+            ITameData targetData = lastHurtBy.getCapability(TAME_DATA).orElse(new TameData());
             if (targetData.tamed() && targetData.owner() != null && targetData.owner().equals(ownerUUID))
                 return false;//同一个主人的女仆妖精不会内斗
         }

@@ -1,16 +1,18 @@
 package com.github.qinggua114.tamablefairy.events;
 
+import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Monster;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
-import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
-@EventBusSubscriber
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AvoidBeingTargeted {
     public AvoidBeingTargeted(){
     }
@@ -20,17 +22,17 @@ public class AvoidBeingTargeted {
         //防止驯服的女仆妖精被铁傀儡等主动攻击敌对生物的生物设为目标
         Entity entity = event.getEntity();
         if (entity.level().isClientSide) return;
-        Entity target = event.getNewAboutToBeSetTarget();
+        Entity target = event.getNewTarget();
         if (!(target instanceof EntityFairy)) return;
         //若未驯服,保留目标设定事件
-        TameData targetTameData = target.getData(TAME_DATA);
+        ITameData targetTameData = target.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!targetTameData.tamed()) return;
 
         if (entity instanceof Monster && !(entity instanceof EntityFairy)) return;//如果生物是怪物,且不是女仆妖精,保留目标设定事件
 
         //如果是同一个主人的女仆妖精,取消事件
         if (entity instanceof EntityFairy){
-            TameData entityTameData = entity.getData(TAME_DATA);
+            ITameData entityTameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
 
             if (targetTameData.owner() == entityTameData.owner()) {
                 event.setCanceled(true);

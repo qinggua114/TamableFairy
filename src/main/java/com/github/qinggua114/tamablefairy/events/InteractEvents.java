@@ -1,5 +1,6 @@
 package com.github.qinggua114.tamablefairy.events;
 
+import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -9,13 +10,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
-import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
-@EventBusSubscriber
+
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class InteractEvents {
 
 
@@ -26,7 +29,7 @@ public class InteractEvents {
     public static void onInteract(PlayerInteractEvent.EntityInteract event){
         Entity target = event.getTarget();
         if (target.level().isClientSide) return;
-        TameData tameData = target.getData(TAME_DATA);
+        ITameData tameData = target.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!tameData.tamed()) return;
 
         Player player = event.getEntity();

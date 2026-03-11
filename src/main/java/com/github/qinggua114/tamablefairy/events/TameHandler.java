@@ -1,5 +1,6 @@
 package com.github.qinggua114.tamablefairy.events;
 
+import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.ModifyAI;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
@@ -11,13 +12,14 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
-import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
-@EventBusSubscriber
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TameHandler {
 
     private static Entity target;
@@ -29,12 +31,13 @@ public class TameHandler {
         if (player.level().isClientSide) return;
         target = event.getTarget();
         ItemStack itemStack = event.getItemStack();
-        TameData tameData = target.getData(TAME_DATA);
+        ITameData tameData = target.getCapability(TAME_DATA, null).orElse(new TameData());
 
         if (target instanceof EntityFairy && !tameData.tamed()){
             if (event.getItemStack().is(Items.CAKE)){
-                TameData newData = new TameData(true, player.getUUID());
-                target.setData(TAME_DATA, newData);
+                //TameData newData = new TameData(true, player.getUUID());
+                tameData.setTamed(true);
+                tameData.setOwner(player.getUUID());
                 ModifyAI.letTamed((Mob) target);
                 spawnParticle((ServerLevel) event.getLevel());
                 if (player.getAbilities().instabuild) return;
