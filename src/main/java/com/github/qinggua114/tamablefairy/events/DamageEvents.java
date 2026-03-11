@@ -11,7 +11,6 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-
 import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 

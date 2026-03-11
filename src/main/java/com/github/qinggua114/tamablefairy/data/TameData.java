@@ -2,6 +2,7 @@ package com.github.qinggua114.tamablefairy.data;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
+
 import java.util.UUID;
 
 public class TameData implements ITameData, INBTSerializable<CompoundTag> {
