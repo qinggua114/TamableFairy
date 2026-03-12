@@ -1,9 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.github.qinggua114.tamablefairy.mixin",
+  "package": "com.github.qinggua114.tamablefairy.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "EnableLeashing"
   ],
   "client": [
   ],
