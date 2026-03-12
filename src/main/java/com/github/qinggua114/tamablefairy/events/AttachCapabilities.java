@@ -19,7 +19,7 @@ public class AttachCapabilities {
 
     @SubscribeEvent
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event){
-        if (event.getObject() instanceof EntityFairy){
+        if (event.getObject().getClass().equals(EntityFairy.class)){
             event.addCapability(ResourceLocation.fromNamespaceAndPath(MODID, "tamedata"), new TameDataProvider());
         }
     }

@@ -33,9 +33,8 @@ public class TameHandler {
         ItemStack itemStack = event.getItemStack();
         ITameData tameData = target.getCapability(TAME_DATA, null).orElse(new TameData());
 
-        if (target instanceof EntityFairy && !tameData.tamed()){
+        if (target.getClass().equals(EntityFairy.class) && !tameData.tamed()){
             if (event.getItemStack().is(Items.CAKE)){
-                //TameData newData = new TameData(true, player.getUUID());
                 tameData.setTamed(true);
                 tameData.setOwner(player.getUUID());
                 ModifyAI.letTamed((Mob) target);

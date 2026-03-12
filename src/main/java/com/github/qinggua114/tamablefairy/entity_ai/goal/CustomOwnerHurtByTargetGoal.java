@@ -34,7 +34,7 @@ public class CustomOwnerHurtByTargetGoal extends TargetGoal {
         lastHurtBy = owner.getLastHurtByMob();
         if (lastHurtBy == null) return false;
 
-        if(lastHurtBy instanceof EntityFairy){
+        if(lastHurtBy.getClass().equals(EntityFairy.class)){
             ITameData targetData = lastHurtBy.getCapability(TAME_DATA).orElse(new TameData());
             if (targetData.tamed() && targetData.owner() != null && targetData.owner().equals(ownerUUID))
                 return false;//同一个主人的女仆妖精不会内斗

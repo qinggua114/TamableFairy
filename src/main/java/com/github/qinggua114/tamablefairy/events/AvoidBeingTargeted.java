@@ -23,15 +23,15 @@ public class AvoidBeingTargeted {
         Entity entity = event.getEntity();
         if (entity.level().isClientSide) return;
         Entity target = event.getNewTarget();
-        if (!(target instanceof EntityFairy)) return;
+        if (!(target.getClass().equals(EntityFairy.class))) return;
         //若未驯服,保留目标设定事件
         ITameData targetTameData = target.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!targetTameData.tamed()) return;
 
-        if (entity instanceof Monster && !(entity instanceof EntityFairy)) return;//如果生物是怪物,且不是女仆妖精,保留目标设定事件
+        if (entity instanceof Monster && !(entity.getClass().equals(EntityFairy.class))) return;//如果生物是怪物,且不是女仆妖精,保留目标设定事件
 
         //如果是同一个主人的女仆妖精,取消事件
-        if (entity instanceof EntityFairy){
+        if (entity.getClass().equals(EntityFairy.class)){
             ITameData entityTameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
 
             if (targetTameData.owner() == entityTameData.owner()) {

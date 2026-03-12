@@ -22,7 +22,7 @@ public class OnFairyDeath {
     public static void onDeathEvent(LivingDeathEvent event){
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide()) return;
-        if (!(entity instanceof EntityFairy)) return;
+        if (!(entity.getClass().equals(EntityFairy.class))) return;
 
         ITameData tameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!tameData.tamed()) return;
