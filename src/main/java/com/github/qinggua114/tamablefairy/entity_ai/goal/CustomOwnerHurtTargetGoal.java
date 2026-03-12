@@ -32,13 +32,13 @@ public class CustomOwnerHurtTargetGoal extends TargetGoal {
         lastHurt = owner.getLastHurtMob();
         if (lastHurt == null) return false;
 
-        if(lastHurt instanceof EntityFairy){
+        if(lastHurt.getClass().equals(EntityFairy.class)){
             TameData targetData = lastHurt.getData(TAME_DATA);
             if (targetData.tamed() && targetData.owner() != null && targetData.owner().equals(ownerUUID))
                 return false;//同一个主人的女仆妖精不会内斗
         }
 
-        return lastHurt != mob && !(lastHurt instanceof EntityMaid) &&  lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
+        return lastHurt != mob && !(lastHurt.getClass().equals(EntityMaid.class)) &&  lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
     }
 
     @Override

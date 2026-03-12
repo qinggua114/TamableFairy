@@ -22,9 +22,10 @@ public class DamageEvents {
     public static void onTamedFairyDamage(LivingIncomingDamageEvent event){
         //如果是同一个主人的女仆妖精,则忽略伤害
         LivingEntity entity = event.getEntity();
-        if(!(entity instanceof EntityFairy) || entity.level().isClientSide) return;
+        if(!(entity.getClass().equals(EntityFairy.class)) || entity.level().isClientSide) return;
         Entity source = event.getSource().getEntity();
-        if(!(source instanceof EntityFairy)) return;
+        if (source == null) return;
+        if(!(source.getClass().equals(EntityFairy.class))) return;
 
         TameData tameData = entity.getData(TAME_DATA);
         if (!tameData.tamed()) return;

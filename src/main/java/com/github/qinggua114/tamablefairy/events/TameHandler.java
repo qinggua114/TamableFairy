@@ -31,7 +31,7 @@ public class TameHandler {
         ItemStack itemStack = event.getItemStack();
         TameData tameData = target.getData(TAME_DATA);
 
-        if (target instanceof EntityFairy && !tameData.tamed()){
+        if (target.getClass().equals(EntityFairy.class) && !tameData.tamed()){//解决将妖怪的归家中的生物当成女仆妖精驯服的问题
             if (event.getItemStack().is(Items.CAKE)){
                 TameData newData = new TameData(true, player.getUUID());
                 target.setData(TAME_DATA, newData);

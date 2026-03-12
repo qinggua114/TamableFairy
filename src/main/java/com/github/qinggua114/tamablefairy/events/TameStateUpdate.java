@@ -20,7 +20,7 @@ public class TameStateUpdate {
     public static void onJoinLevel( EntityJoinLevelEvent event){
         Entity entity = event.getEntity();
         if (event.getLevel().isClientSide) return;
-        if (!(entity instanceof EntityFairy)) return;
+        if (!(entity.getClass().equals(EntityFairy.class))) return;
 
         TameData tameData = entity.getData(TAME_DATA);
         if (tameData.tamed()){
