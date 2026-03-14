@@ -20,6 +20,7 @@ This is an addon mod for [Touhou Little Maid](https://www.curseforge.com/minecra
 - **No Friendly Fire** – Maid Fairies owned by the same player cannot damage each other.
 - **Avoid Unwanted Targeting** – Tamed Maid Fairies are no longer targeted by Iron Golems or other mobs that would normally be hostile to them.
 - **Heal with Sugar** – Use **sugar** on your own Maid Fairy to restore 2 health points.
+- **Allow Leashing** - Allow leashing the tamed fairies.
 
 ---
 
@@ -46,8 +47,7 @@ This is an addon mod for [Touhou Little Maid](https://www.curseforge.com/minecra
 ---
 
 ## Future Plans
-- **Configuration**: Currently only a placeholder config class (`Config.java`) exists with no actual functionality. Configuration features are planned for later development.
-- **Entity Behavior**: Plans to add a right‑click “sit” function similar to vanilla tamable mobs.
+- **MaidFairies GUI**: Planned to create a GUI for tamed fairies to manage its action state.
 - **Other Versions**: This mod is planned to be ported to other Minecraft versions compatible with [Touhou Little Maid](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid).
 
 ---
