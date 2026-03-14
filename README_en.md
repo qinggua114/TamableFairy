@@ -1,3 +1,4 @@
+_**Warning**: This branch is deprecated and is only used to retain early commit history. If you need to obtain the source code, please clone the branch for the corresponding version instead of the deprecated master branch._
 # TamableFairy
 
 [![Image](https://cdn.modrinth.com/data/4EAV6XSC/images/72d1aa45d3f7f670a43cb9db292c4119645e49b8.png)]()

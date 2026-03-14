@@ -1,3 +1,4 @@
+_**警告**：该分支已弃用，仅用于保留早期提交历史，若需获取源码，请clone对应版本的分支，而非已弃用的master分支_
 # TamableFairy
 
 [![Image](https://cdn.modrinth.com/data/4EAV6XSC/images/72d1aa45d3f7f670a43cb9db292c4119645e49b8.png)]()
@@ -18,7 +19,7 @@
 - **驯服妖精** – 手持**蛋糕**右键点击妖精即可驯服。
 - **生物AI** – 重写了女仆妖精的部分AI，驯服的妖精会跟随主人。如果距离过远（≥16 格），它们会直接传送到主人身边。 且驯服的妖精会攻击任何伤害主人或主人正在攻击的生物。
 - **无友军伤害** – 同一玩家拥有的妖精之间不会互相伤害。
-- **避免被误伤** – 驯服的女仆妖精不会再被铁傀儡等通常会对它们产生仇恨的生物锁定为目标。
+- **避免被误伤** – 驯服的女仆妖精不会再被铁傀儡等通常会对它们产生敌意的生物锁定为目标。
 - **吃糖回血** – 对自己的女仆妖精使用**糖**，可为其恢复 2点生命值。
 
 ---
@@ -32,7 +33,7 @@
 ## 技术细节
 
 - **数据存储**：使用 NeoForge 的 `AttachmentType` 存储 `TameData`（ `BOOL tamed` 和 `UUID owner`）。数据会被序列化并在客户端同步。
-- **AI 修改**：由于EntityFairy继承自Monster,没有原版的可驯服生物（TamableAnimal）默认AI，驯服时，会将女仆妖精原有的目标选择器（targetSelecter）替换为：
+- **AI 修改**：由于EntityFairy继承自Monster,没有原版的可驯服生物（TamableAnimal）默认AI，驯服时，会将将女仆妖精原有的目标选择器（targetSelecter）替换为：
     - `CustomOwnerHurtByTargetGoal` – 攻击伤害主人的生物。
     - `CustomOwnerHurtTargetGoal` – 攻击主人正在攻击的生物（包含主人检查，避免攻击同主的妖精）。
     - 并添加一个自定义行为 `CustomFollowOwnerGoal` – 跟随主人，距离过远时传送。
