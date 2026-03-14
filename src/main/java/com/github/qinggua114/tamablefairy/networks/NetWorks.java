@@ -1,7 +1,6 @@
 package com.github.qinggua114.tamablefairy.networks;
 
 import com.github.qinggua114.tamablefairy.TamableFairy;
-import com.github.qinggua114.tamablefairy.networks.TameDataSyncPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;

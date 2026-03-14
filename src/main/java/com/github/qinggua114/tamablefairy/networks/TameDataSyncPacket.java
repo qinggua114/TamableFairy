@@ -1,12 +1,10 @@
 package com.github.qinggua114.tamablefairy.networks;
 
-import com.github.qinggua114.tamablefairy.TamableFairy;
 import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.UUID;
