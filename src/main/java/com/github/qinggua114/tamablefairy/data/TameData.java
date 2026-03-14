@@ -37,13 +37,17 @@ public class TameData implements ITameData, INBTSerializable<CompoundTag> {
     public CompoundTag serializeNBT() {
         CompoundTag tempTag = new CompoundTag();
         tempTag.putBoolean("tamed", tamed);
-        tempTag.putUUID("owner", owner);
+        if (owner != null)
+            tempTag.putUUID("owner", owner);
         return tempTag;
     }
 
     @Override
     public void deserializeNBT(CompoundTag compoundTag) {
         this.tamed = compoundTag.getBoolean("tamed");
-        this.owner = compoundTag.getUUID("owner");
+        if (compoundTag.contains("owner"))
+            this.owner = compoundTag.getUUID("owner");
+        else
+            this.owner = null;
     }
 }

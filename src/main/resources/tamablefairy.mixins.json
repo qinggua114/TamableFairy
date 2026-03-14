@@ -1,16 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.github.qinggua114.tamablefairy.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "package": "com.github.qinggua114.tamablefairy.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "tamablefairy.refmap.json",
   "mixins": [
+    "EnableLeashing"
   ],
-  "client": [
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "overwrites": {
-    "requireAnnotations": true
-  }
+  "client": [],
+  "server": []
 }

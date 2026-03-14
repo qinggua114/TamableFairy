@@ -23,6 +23,7 @@ public class AvoidBeingTargeted {
         Entity entity = event.getEntity();
         if (entity.level().isClientSide) return;
         Entity target = event.getNewTarget();
+        if (target == null) return;
         if (!(target.getClass().equals(EntityFairy.class))) return;
         //若未驯服,保留目标设定事件
         ITameData targetTameData = target.getCapability(TAME_DATA, null).orElse(new TameData());

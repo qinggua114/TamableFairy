@@ -3,6 +3,8 @@ package com.github.qinggua114.tamablefairy.events;
 import com.github.qinggua114.tamablefairy.data.ITameData;
 import com.github.qinggua114.tamablefairy.data.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.ModifyAI;
+import com.github.qinggua114.tamablefairy.networks.NetWorks;
+import com.github.qinggua114.tamablefairy.networks.TameDataSyncPacket;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
 
 import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
@@ -38,6 +41,8 @@ public class TameHandler {
                 tameData.setTamed(true);
                 tameData.setOwner(player.getUUID());
                 ModifyAI.letTamed((Mob) target);
+                NetWorks.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> target),
+                        new TameDataSyncPacket(target.getId(), tameData.tamed(), player.getUUID()));
                 spawnParticle((ServerLevel) event.getLevel());
                 if (player.getAbilities().instabuild) return;
                 itemStack.shrink(1);

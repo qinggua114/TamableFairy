@@ -1,9 +1,9 @@
 plugins {
     id 'eclipse'
     id 'idea'
-    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'net.minecraftforge.gradle' version '6.0.25'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
-
 
 group = mod_group_id
 version = mod_version
@@ -126,8 +126,11 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
     compileOnly "curse.maven:touhou-little-maid-355044:7510714"
     runtimeOnly "curse.maven:touhou-little-maid-355044:7510714"
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -182,4 +185,13 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+mixin {
+    // 指定 refmap 的生成路径和文件名
+    add sourceSets.main, "tamablefairy.refmap.json"
+    // 指定你的主 mixin 配置文件
+    config "tamablefairy.mixins.json"
+
+    debug.export = true // 可选，用于调试，可以输出 Mixin 处理后的类文件
 }
