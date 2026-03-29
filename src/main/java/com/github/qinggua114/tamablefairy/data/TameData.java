@@ -10,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.UUID;
 
-public record TameData (boolean tamed, UUID owner){
+
+public record TameData(boolean tamed, UUID owner) {
 
     //序列化
     public static final Codec<TameData> CODEC = RecordCodecBuilder.create(instance ->
@@ -27,7 +28,7 @@ public record TameData (boolean tamed, UUID owner){
         public @NotNull TameData decode(@NotNull ByteBuf byteBuf) {
             boolean tamed = ByteBufCodecs.BOOL.decode(byteBuf);
             UUID owner = null;
-            if (tamed){
+            if (tamed) {
                 //将拆成两个Long的UUID还原
                 Long mostSigBits = ByteBufCodecs.VAR_LONG.decode(byteBuf);
                 Long leastSigBits = ByteBufCodecs.VAR_LONG.decode(byteBuf);
@@ -35,10 +36,11 @@ public record TameData (boolean tamed, UUID owner){
             }
             return new TameData(tamed, owner);
         }
+
         @Override
         public void encode(@NotNull ByteBuf byteBuf, TameData tameData) {
             ByteBufCodecs.BOOL.encode(byteBuf, tameData.tamed());
-            if (tameData.tamed()){
+            if (tameData.tamed()) {
                 //将UUID拆成最高有效位和最低有效位,作为两个Long类型数据分别传输
                 ByteBufCodecs.VAR_LONG.encode(byteBuf, tameData.owner.getMostSignificantBits());
                 ByteBufCodecs.VAR_LONG.encode(byteBuf, tameData.owner.getLeastSignificantBits());

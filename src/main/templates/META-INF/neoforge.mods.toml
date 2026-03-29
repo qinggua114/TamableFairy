@@ -6,8 +6,8 @@ modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
 displayURL = "https://github.com/qinggua114/TamableFairy"
-logoFile= "logo.png"
-credits= "TartaricAcid"
+logoFile = "logo.png"
+credits = "TartaricAcid"
 authors = "${mod_authors}"
 
 # The description text for the mod (multi line!) (#mandatory)

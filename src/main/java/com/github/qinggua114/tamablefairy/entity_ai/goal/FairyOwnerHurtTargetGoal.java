@@ -11,38 +11,41 @@ import net.minecraft.world.entity.player.Player;
 import java.util.EnumSet;
 import java.util.UUID;
 
+import static com.github.qinggua114.tamablefairy.data.Attachments.ACT_STATE;
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 
-public class CustomOwnerHurtTargetGoal extends TargetGoal {
+public class FairyOwnerHurtTargetGoal extends TargetGoal {
 
     private LivingEntity lastHurt;
 
-    public CustomOwnerHurtTargetGoal(Mob mob){
+    public FairyOwnerHurtTargetGoal(Mob mob) {
         super(mob, false);
         this.setFlags(EnumSet.of(Flag.TARGET));
     }
 
     @Override
-    public boolean canUse(){
+    public boolean canUse() {
         UUID ownerUUID = mob.getData(TAME_DATA).owner();
         if (ownerUUID == null) return false;
         Player owner = mob.level().getPlayerByUUID(ownerUUID);
         if (owner == null) return false;
 
+        if (!mob.getData(ACT_STATE).attackEnabled()) return false;
+
         lastHurt = owner.getLastHurtMob();
         if (lastHurt == null) return false;
 
-        if(lastHurt.getClass().equals(EntityFairy.class)){
+        if (lastHurt.getClass().equals(EntityFairy.class)) {
             TameData targetData = lastHurt.getData(TAME_DATA);
             if (targetData.tamed() && targetData.owner() != null && targetData.owner().equals(ownerUUID))
                 return false;//同一个主人的女仆妖精不会内斗
         }
 
-        return lastHurt != mob && !(lastHurt.getClass().equals(EntityMaid.class)) &&  lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
+        return lastHurt != mob && !(lastHurt.getClass().equals(EntityMaid.class)) && lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
     }
 
     @Override
-    public void start(){
+    public void start() {
         mob.setTarget(lastHurt);
         super.start();
     }

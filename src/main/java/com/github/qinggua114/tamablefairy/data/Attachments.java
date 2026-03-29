@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.function.Supplier;
 
 public class Attachments {
-    public Attachments(){
+    public Attachments() {
     }
 
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, TamableFairy.MODID);
@@ -20,7 +20,16 @@ public class Attachments {
                             .sync(TameData.STREAM_CODEC)
                             .build()
             );
-    public static void register(IEventBus modBus){
+
+    public static final Supplier<AttachmentType<ActState>> ACT_STATE =
+            ATTACHMENT_TYPES.register("act_state",
+                    () -> AttachmentType.builder(() -> ActState.DEFAULT)
+                            .serialize(ActState.CODEC)
+                            .sync(ActState.STREAM_CODEC)
+                            .build()
+            );
+
+    public static void register(IEventBus modBus) {
         ATTACHMENT_TYPES.register(modBus);
     }
 }

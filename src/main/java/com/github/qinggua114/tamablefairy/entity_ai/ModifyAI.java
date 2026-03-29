@@ -1,37 +1,49 @@
 package com.github.qinggua114.tamablefairy.entity_ai;
 
-import com.github.qinggua114.tamablefairy.entity_ai.goal.CustomFollowOwnerGoal;
-import com.github.qinggua114.tamablefairy.entity_ai.goal.CustomOwnerHurtByTargetGoal;
-import com.github.qinggua114.tamablefairy.entity_ai.goal.CustomOwnerHurtTargetGoal;
+import com.github.qinggua114.tamablefairy.entity_ai.goal.FairyFollowOwnerGoal;
+import com.github.qinggua114.tamablefairy.entity_ai.goal.FairyMoveTowardsRestrictionGoal;
+import com.github.qinggua114.tamablefairy.entity_ai.goal.FairyOwnerHurtByTargetGoal;
+import com.github.qinggua114.tamablefairy.entity_ai.goal.FairyOwnerHurtTargetGoal;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModifyAI {
-    public ModifyAI(){
+    public ModifyAI() {
     }
 
 
-    public static void letTamed(Mob fairy){
+    public static void letTamed(Mob fairy) {
         //删除原有目标选择器
-        List<WrappedGoal> goals = new ArrayList<>(fairy.targetSelector.getAvailableGoals());
-        for (WrappedGoal goal : goals) {
+        List<WrappedGoal> goalSelectors = new ArrayList<>(fairy.targetSelector.getAvailableGoals());
+        for (WrappedGoal goal : goalSelectors) {
             if (goal != null) {
                 fairy.targetSelector.removeGoal(goal.getGoal());
             }
         }
         fairy.setTarget(null);
 
+        //删除不需要的原始Goal
+        List<WrappedGoal> goals = new ArrayList<>(fairy.goalSelector.getAvailableGoals());
+        for (WrappedGoal goal : goals) {
+            if (goal.getGoal() instanceof MoveTowardsRestrictionGoal) {
+                fairy.goalSelector.removeGoal(goal.getGoal());
+            }
+        }
+
         //跟随主人
-        fairy.goalSelector.addGoal(1, new CustomFollowOwnerGoal(fairy, 1, 5, 3, true, 16));
+        fairy.goalSelector.addGoal(1, new FairyFollowOwnerGoal(fairy, 1, 5, true, 16));
+        //新的随机移动Goal
+        fairy.goalSelector.addGoal(3, new FairyMoveTowardsRestrictionGoal(fairy, 1));
 
         //攻击主人的目标
-        fairy.targetSelector.addGoal(1, new CustomOwnerHurtByTargetGoal(fairy));
-        fairy.targetSelector.addGoal(2, new CustomOwnerHurtTargetGoal(fairy));
+        fairy.targetSelector.addGoal(1, new FairyOwnerHurtByTargetGoal(fairy));
+        fairy.targetSelector.addGoal(2, new FairyOwnerHurtTargetGoal(fairy));
 
         //更改属性,稍微加强一点,要不太不抗揍了
         AttributeInstance maxHealth = fairy.getAttribute(Attributes.ARMOR);

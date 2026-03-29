@@ -13,11 +13,11 @@ import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 
 @EventBusSubscriber
 public class OnFairyDeath {
-    public OnFairyDeath(){
+    public OnFairyDeath() {
     }
 
     @SubscribeEvent
-    public static void onDeathEvent(LivingDeathEvent event){
+    public static void onDeathEvent(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide()) return;
         if (!(entity.getClass().equals(EntityFairy.class))) return;
@@ -27,7 +27,7 @@ public class OnFairyDeath {
         ServerPlayer owner = (ServerPlayer) entity.level().getPlayerByUUID(tameData.owner());
         if (owner == null) return;
 
-        if(entity.getKillCredit() == null)
+        if (entity.getKillCredit() == null)
             owner.sendSystemMessage(Component.translatable(
                     "message.on_tamed_fairy_death.without_killer",
                     entity.getDisplayName().getString())

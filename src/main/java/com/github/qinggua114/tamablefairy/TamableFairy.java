@@ -8,7 +8,7 @@ import net.neoforged.fml.common.Mod;
 public class TamableFairy {
     public static final String MODID = "tamablefairy";
 
-    public TamableFairy(IEventBus modBus){
+    public TamableFairy(IEventBus modBus) {
         Attachments.register(modBus);
     }
 }
