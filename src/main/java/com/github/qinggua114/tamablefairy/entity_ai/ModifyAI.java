@@ -2,7 +2,6 @@ package com.github.qinggua114.tamablefairy.entity_ai;
 
 import com.github.qinggua114.tamablefairy.entity_ai.goal.*;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;

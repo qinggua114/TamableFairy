@@ -1,7 +1,6 @@
 package com.github.qinggua114.tamablefairy.events;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
-import com.github.qinggua114.tamablefairy.gui.FairyMenuProvider;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;

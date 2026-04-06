@@ -2,7 +2,6 @@ package com.github.qinggua114.tamablefairy.gui;
 
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -48,13 +47,13 @@ public class FairyGuiMenu extends AbstractContainerMenu {
         ItemStack itemStack = slot.getItem();
         ItemStack originalItemStack = itemStack.copy();
         if (index < 27) {
-            if (!moveItemStackTo(itemStack, 27, 36, false)){
+            if (!moveItemStackTo(itemStack, 27, 36, false)) {
                 return ItemStack.EMPTY;
             }
         }
 
         if (index > 26 && index < 36) {
-            if (!moveItemStackTo(itemStack, 0, 27, false)){
+            if (!moveItemStackTo(itemStack, 0, 27, false)) {
                 return ItemStack.EMPTY;
             }
         }

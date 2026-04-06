@@ -7,7 +7,6 @@ import com.github.qinggua114.tamablefairy.gui.sliders.MoveRangeSlider;
 import com.github.qinggua114.tamablefairy.networks.C2SFairyGuiPayLoad;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -117,7 +116,7 @@ public class FairyGuiScreen extends AbstractContainerScreen<FairyGuiMenu> {
                 Component.translatable(
                         "btn.enable_follow",
                         followOwnerEnabled ?
-                                Component.translatable("text.enabled"):
+                                Component.translatable("text.enabled") :
                                 Component.translatable("text.disabled")
                 )
         );
@@ -126,7 +125,7 @@ public class FairyGuiScreen extends AbstractContainerScreen<FairyGuiMenu> {
                 Component.translatable(
                         "btn.enable_move_around",
                         moveAroundEnabled ?
-                                Component.translatable("text.enabled"):
+                                Component.translatable("text.enabled") :
                                 Component.translatable("text.disabled")
                 )
         );
@@ -180,20 +179,20 @@ public class FairyGuiScreen extends AbstractContainerScreen<FairyGuiMenu> {
                         String.valueOf(actState.moveRange())
                 )
         );
-            this.moveRangeSlider.setValue((double) actState.moveRange() / 32);
+        this.moveRangeSlider.setValue((double) actState.moveRange() / 32);
     }
 
     @Override
     public void onClose() {
         Vec3 actRangeCenter = fairy.position();
         PacketDistributor.sendToServer(new C2SFairyGuiPayLoad(
-                fairy.getId(),
-                newMode,
-                followOwnerEnabled,
-                moveAroundEnabled,
-                followDistanceSlider.getValue(),
-                moveRangeSlider.getValue(),
-                actRangeCenter
+                        fairy.getId(),
+                        newMode,
+                        followOwnerEnabled,
+                        moveAroundEnabled,
+                        followDistanceSlider.getValue(),
+                        moveRangeSlider.getValue(),
+                        actRangeCenter
                 )
         );
         super.onClose();

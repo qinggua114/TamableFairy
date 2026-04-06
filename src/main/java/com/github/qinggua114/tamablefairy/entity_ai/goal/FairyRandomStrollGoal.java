@@ -16,7 +16,8 @@ public class FairyRandomStrollGoal extends RandomStrollGoal {
     private double wantedX;
     private double wantedY;
     private double wantedZ;
-    private final double speedModifier;;
+    private final double speedModifier;
+    ;
 
     public FairyRandomStrollGoal(Mob mob, double speedModifier) {
         super((PathfinderMob) mob, speedModifier);
