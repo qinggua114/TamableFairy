@@ -18,10 +18,11 @@
 - **驯服妖精** – 手持**蛋糕**右键点击妖精即可驯服。
 - **生物AI** – 重写了女仆妖精的部分AI，驯服的妖精会跟随主人。如果距离过远（≥16 格），它们会直接传送到主人身边。 且驯服的妖精会攻击任何伤害主人或主人正在攻击的生物。
 - **无友军伤害** – 同一玩家拥有的妖精之间不会互相伤害。
-- **避免被误伤** – 驯服的女仆妖精不会再被铁傀儡等通常会对它们产生敌意的生物锁定为目标。
+- **避免被误伤** – 驯服的女仆妖精不再会被铁傀儡等通常会对它们产生敌意的生物锁定为目标。
 - **吃糖回血** – 对自己的女仆妖精使用**糖**，可为其恢复 2点生命值。
 - **允许拴绳** - 已驯服的女仆妖精可以使用拴绳牵引。
-- **和平模式保留** - 在和平模式下已驯服的女仆妖精会被保留
+- **和平模式保留** - 在和平模式下已驯服的女仆妖精会被保留。
+- **女仆妖精GUI** - 已驯服的女仆妖精拥有自己的Gui，可以用于设置活动状态。
 
 ---
 
@@ -34,10 +35,12 @@
 ## 技术细节
 
 - **数据存储**：使用 NeoForge 的 `AttachmentType` 存储 `TameData`（ `BOOL tamed` 和 `UUID owner`）。数据会被序列化并在客户端同步。
-- **AI 修改**：由于EntityFairy继承自Monster,没有原版的可驯服生物（TamableAnimal）默认AI，驯服时，会将将女仆妖精原有的目标选择器（targetSelecter）替换为：
+- **AI 修改**： 由于EntityFairy继承自Monster,没有原版的可驯服生物（TamableAnimal）默认AI，驯服时，会将将女仆妖精原有的目标选择器（targetSelecter）替换为：
     - `FairyOwnerHurtByTargetGoal` – 攻击伤害主人的生物。
-    - `FairyOwnerHurtTargetGoal` – 攻击主人正在攻击的生物（包含主人检查，避免攻击同主的妖精）。
-    - 并添加一个自定义行为 `FairyFollowOwnerGoal` – 跟随主人，距离过远时传送。
+    - `FairyOwnerHurtTargetGoal` – 攻击主人正在攻击的生物（包含主人检查，避免攻击同主的妖精）。 
+    并添加自定义行为 ：
+    - `FairyFollowOwnerGoal` – 跟随主人，距离过远时传送。
+    - `FairyRandomStrollGoal` – 在游荡启用时随机移动
 - **事件处理**：
     - `AvoidBeingTargeted` – 防止铁傀儡等将驯服妖精设为攻击目标。
     - `IgnoreDamage` – 如果伤害来源和目标都是同一主人的女仆妖精，则取消伤害，防止撞到自己人的弹幕趋势。
@@ -48,7 +51,6 @@
 ---
 
 ## 开发计划
-- **女仆妖精GUI**：计划为已驯服的女仆妖精添加GUI以管理活动状态。
 - **其他版本**：本模组计划移植至与 [Touhou Little Maid](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid) 兼容的其他Minecraft版本
 
 ---

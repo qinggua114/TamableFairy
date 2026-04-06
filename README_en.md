@@ -22,6 +22,7 @@ This is an addon mod for [Touhou Little Maid](https://www.curseforge.com/minecra
 - **Heal with Sugar** – Use **sugar** on your own Maid Fairy to restore 2 health points.
 - **Allow Leashing** - Allow leashing the tamed fairies.
 - **Peaceful Mode Retention** - Tamed Maid Fairies will be retained in peaceful mode.
+- **Maid Fairy's GUI** - Tamed Maid Fairies have their gui to set their action state.
 
 ---
 
@@ -36,8 +37,10 @@ This is an addon mod for [Touhou Little Maid](https://www.curseforge.com/minecra
 - **Data Storage**: Uses NeoForge’s `AttachmentType` to store `TameData` (`BOOL tamed` and `UUID owner`). Data is serialized and synced to clients.
 - **AI Modification**: Since `EntityFairy` extends `Monster` and does not have the default AI of vanilla tamable animals (`TamableAnimal`), upon taming, the fairy’s original target selector is replaced with:
     - `FairyOwnerHurtByTargetGoal` – Attacks mobs that hurt the owner.
-    - `FairyOwnerHurtTargetGoal` – Attacks mobs that the owner hurts (with owner check to avoid attacking same‑owner fairies).
-    - And a custom goal `FairyFollowOwnerGoal` is added – follows the owner and teleports when too far away.
+    - `FairyOwnerHurtTargetGoal` – Attacks mobs that the owner hurts (with owner check to avoid attacking same‑owner fairies).  
+    And added custom goals
+    - `FairyFollowOwnerGoal` – follows the owner and teleports when too far away.
+    - `FairyRandomStrollGoal` - Do random movement when Move Around is enabled.
 - **Event Handling**:
     - `AvoidBeingTargeted` – Prevents mobs like Iron Golems from targeting tamed fairies.
     - `IgnoreDamage` – Cancels damage if both the source and the target are maid fairies owned by the same player.
@@ -48,7 +51,6 @@ This is an addon mod for [Touhou Little Maid](https://www.curseforge.com/minecra
 ---
 
 ## Future Plans
-- **MaidFairies GUI**: Planned to create a GUI for tamed fairies to manage its action state.
 - **Other Versions**: This mod is planned to be ported to other Minecraft versions compatible with [Touhou Little Maid](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid).
 
 ---
