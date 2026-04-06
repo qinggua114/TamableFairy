@@ -47,7 +47,7 @@ public class FairyFollowOwnerGoal extends Goal {
         if (owner == null) return false;
         if (!(owner.level().equals(mob.level()))) return false;
 
-        return mob.distanceToSqr(owner) > actState.followDistance() * actState.followDistance();//距离大于startDistance时自动跟随
+        return mob.distanceToSqr(owner) > actState.followDistance() * actState.followDistance();//距离大于followDistance时自动跟随
 
     }
 

@@ -38,7 +38,7 @@ public class TameHandler {
                 TameData newData = new TameData(true, player.getUUID());
                 target.setData(TAME_DATA, newData);
                 target.setData(ACT_STATE, ActState.DEFAULT);
-                ModifyAI.letTamed((Mob) target);
+                ModifyAI.letTamed((EntityFairy) target);
                 spawnParticle((ServerLevel) event.getLevel());
                 if (player.getAbilities().instabuild) return;
                 itemStack.shrink(1);

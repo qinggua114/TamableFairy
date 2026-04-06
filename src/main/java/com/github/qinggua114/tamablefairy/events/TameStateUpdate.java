@@ -24,7 +24,7 @@ public class TameStateUpdate {
 
         TameData tameData = entity.getData(TAME_DATA);
         if (tameData.tamed()) {
-            ModifyAI.letTamed((Mob) entity);
+            ModifyAI.letTamed((EntityFairy) entity);
         }
 
     }

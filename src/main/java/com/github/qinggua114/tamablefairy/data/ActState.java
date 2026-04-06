@@ -1,13 +1,15 @@
 package com.github.qinggua114.tamablefairy.data;
 
+import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.phys.Vec3;
 
 public record ActState(
-        boolean attackEnabled,
+        AttackModes attackMode,
         boolean followOwnerEnabled,
         boolean moveAroundEnabled,
         int followDistance,
@@ -25,7 +27,7 @@ public record ActState(
 
     public static final Codec<ActState> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.BOOL.fieldOf("attack_enabled").forGetter(ActState::attackEnabled),
+                    AttackModes.CODEC.fieldOf("attack_mode").forGetter(ActState::attackMode),
                     Codec.BOOL.fieldOf("follow_owner_enabled").forGetter(ActState::followOwnerEnabled),
                     Codec.BOOL.fieldOf("move_around_enabled").forGetter(ActState::moveAroundEnabled),
                     Codec.INT.fieldOf("follow_distance").forGetter(ActState::followDistance),
@@ -38,8 +40,8 @@ public record ActState(
 
     public static final StreamCodec<FriendlyByteBuf, ActState> STREAM_CODEC =
             StreamCodec.composite(
-                    StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean),
-                    ActState::attackEnabled,
+                    ByteBufCodecs.fromCodec(AttackModes.CODEC),
+                    ActState::attackMode,
                     StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean),
                     ActState::followOwnerEnabled,
                     StreamCodec.of(FriendlyByteBuf::writeBoolean, FriendlyByteBuf::readBoolean),
@@ -53,5 +55,5 @@ public record ActState(
                     ActState::new
             );
 
-    public static final ActState DEFAULT = new ActState(true, true, true, 7, 5, Vec3.ZERO);//创建默认数据
+    public static final ActState DEFAULT = new ActState(AttackModes.PASSIVE, true, true, 7, 5, Vec3.ZERO);//创建默认数据
 }

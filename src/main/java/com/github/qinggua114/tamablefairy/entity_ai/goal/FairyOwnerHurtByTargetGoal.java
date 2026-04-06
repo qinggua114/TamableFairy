@@ -1,6 +1,7 @@
 package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,7 +31,7 @@ public class FairyOwnerHurtByTargetGoal extends TargetGoal {
         Player owner = mob.level().getPlayerByUUID(ownerUUID);
         if (owner == null) return false;
 
-        if (!mob.getData(ACT_STATE).attackEnabled()) return false;
+        if (!mob.getData(ACT_STATE).attackMode().equals(AttackModes.PASSIVE)) return false;
 
         lastHurtBy = owner.getLastHurtByMob();
         if (lastHurtBy == null) return false;
