@@ -7,7 +7,7 @@
 
 [![NeoForge](https://img.shields.io/badge/NeoForge-21.1-blue.svg)](https://neoforged.net/)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-brightgreen.svg)](https://minecraft.net)
-[![Touhou Little Maid](https://img.shields.io/badge/Touhou%20Little%20Maid-Dependency-orange)](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid)
+[![Touhou Little Maid](https://img.shields.io/badge/Touhou%20Little%20Maid-Required-orange)](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid)
 
 This is an addon mod for [Touhou Little Maid](https://www.curseforge.com/minecraft/mc-mods/touhou-little-maid) that allows you to tame the Maid Fairies from the mod.
 
