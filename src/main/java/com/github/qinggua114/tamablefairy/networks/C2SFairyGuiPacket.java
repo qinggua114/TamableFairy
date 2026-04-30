@@ -7,6 +7,7 @@ import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
@@ -82,6 +83,8 @@ public class C2SFairyGuiPacket {
 
             IActState actState = entity.getCapability(ACT_STATE).orElse(new ActState());
             actState.setData(packet.attackMode, packet.followOwnerEnabled, packet.moveAroundEnabled, packet.followDistance, packet.moveRange, packet.actRangeCenter);
+
+            if (actState.attackMode().equals(AttackModes.DISABLED)) ((Mob) entity).setTarget(null);
 
             NetWorks.CHANNEL.send(
                     PacketDistributor.TRACKING_ENTITY.with(() -> entity),
