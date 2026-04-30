@@ -2,16 +2,14 @@ package com.github.qinggua114.tamablefairy.networks;
 
 import com.github.qinggua114.tamablefairy.data.actstate.ActState;
 import com.github.qinggua114.tamablefairy.data.actstate.IActState;
-import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
-import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -81,17 +79,19 @@ public class ActStateSyncPacket {
     }
 
     public static void handler(ActStateSyncPacket packet, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() ->
-        {
-            if (FMLLoader.getDist().isDedicatedServer()) return;
-            Level level = Minecraft.getInstance().level;
-            if (level == null) return;
-            Entity entity = level.getEntity(packet.entityId);
-            if (entity == null) return;
+        if (!ctx.get().getDirection().getReceptionSide().isClient()) return;
+        ctx.get().enqueueWork(() -> clientHandler(packet));
+    }
 
-            IActState actState = entity.getCapability(ACT_STATE).orElse(new ActState());
-            actState.setData(packet.attackMode, packet.followOwnerEnabled, packet.moveAroundEnabled, packet.followDistance, packet.moveRange, packet.actRangeCenter);
-        });
+    @OnlyIn(Dist.CLIENT)
+    public static void clientHandler(ActStateSyncPacket packet) {
+        Level level = Minecraft.getInstance().level;
+        if (level == null) return;
+        Entity entity = level.getEntity(packet.entityId);
+        if (entity == null) return;
+
+        IActState actState = entity.getCapability(ACT_STATE).orElse(new ActState());
+        actState.setData(packet.attackMode, packet.followOwnerEnabled, packet.moveAroundEnabled, packet.followDistance, packet.moveRange, packet.actRangeCenter);
     }
 }
 

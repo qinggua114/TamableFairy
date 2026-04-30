@@ -27,7 +27,7 @@ public class TameHandler {
     private static Entity target;
 
     @SubscribeEvent
-    public static void onInteract(PlayerInteractEvent.EntityInteract event){
+    public static void onInteract(PlayerInteractEvent.EntityInteract event) {
 
         Player player = event.getEntity();
         if (player.level().isClientSide) return;
@@ -35,8 +35,8 @@ public class TameHandler {
         ItemStack itemStack = event.getItemStack();
         ITameData tameData = target.getCapability(TAME_DATA, null).orElse(new TameData());
 
-        if (target.getClass().equals(EntityFairy.class) && !tameData.tamed()){
-            if (event.getItemStack().is(Items.CAKE)){
+        if (target.getClass().equals(EntityFairy.class) && !tameData.tamed()) {
+            if (event.getItemStack().is(Items.CAKE)) {
                 tameData.setTamed(true);
                 tameData.setOwner(player.getUUID());
                 ModifyAI.letTamed((EntityFairy) target);
@@ -49,10 +49,10 @@ public class TameHandler {
         }
     }
 
-    private static void spawnParticle(ServerLevel serverLevel){
+    private static void spawnParticle(ServerLevel serverLevel) {
         ParticleOptions particleOptions = ParticleTypes.HEART;
         double x = target.getX();
-        double y = target.getY()+0.7;
+        double y = target.getY() + 0.7;
         double z = target.getZ();
         int count = 10;
         double xOffset = 0.5;

@@ -40,7 +40,7 @@ public class FairyRandomStrollGoal extends RandomStrollGoal {
 
     @Override
     public boolean canContinueToUse() {
-        return !mob.getNavigation().isDone() && mob.getCapability(ACT_STATE,null).orElse(new ActState()).moveAroundEnabled();
+        return !mob.getNavigation().isDone() && mob.getCapability(ACT_STATE, null).orElse(new ActState()).moveAroundEnabled();
     }
 
     @Override

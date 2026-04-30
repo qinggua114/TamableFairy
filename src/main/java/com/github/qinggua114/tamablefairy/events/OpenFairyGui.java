@@ -3,9 +3,7 @@ package com.github.qinggua114.tamablefairy.events;
 import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
 import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import com.github.qinggua114.tamablefairy.gui.FairyMenuProvider;
-import com.github.qinggua114.tamablefairy.networks.NetWorks;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -15,8 +13,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkHooks;
-
-import java.util.function.Consumer;
 
 import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;

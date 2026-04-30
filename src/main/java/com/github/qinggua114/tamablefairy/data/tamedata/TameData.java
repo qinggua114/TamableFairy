@@ -10,26 +10,26 @@ public class TameData implements ITameData, INBTSerializable<CompoundTag> {
     private boolean tamed = false;
     private UUID owner = null;
 
-    public TameData(){
+    public TameData() {
     }
 
     @Override
-    public boolean tamed(){
+    public boolean tamed() {
         return tamed;
     }
 
     @Override
-    public UUID owner(){
+    public UUID owner() {
         return owner;
     }
 
     @Override
-    public void setTamed(boolean _tamed){
+    public void setTamed(boolean _tamed) {
         tamed = _tamed;
     }
 
     @Override
-    public void setOwner(UUID _owner){
+    public void setOwner(UUID _owner) {
         owner = _owner;
     }
 

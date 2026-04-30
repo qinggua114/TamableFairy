@@ -5,7 +5,8 @@ import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.UUID;
@@ -38,19 +39,21 @@ public class TameDataSyncPacket {
     }
 
     public static void handler(TameDataSyncPacket packet, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() ->
-        {
-            if (FMLLoader.getDist().isDedicatedServer()) return;
-            Entity entity = null;
-            if (Minecraft.getInstance().level != null) {
-                entity = Minecraft.getInstance().level.getEntity(packet.entityId);
-            }
-            if (entity != null) {
-                ITameData tameData = entity.getCapability(TAME_DATA).orElse(new TameData());
-                tameData.setTamed(packet.tamed);
-                tameData.setOwner(packet.owner);
-            }
-        });
+        if (!ctx.get().getDirection().getReceptionSide().isClient()) return;
+        ctx.get().enqueueWork(() -> clientHandler(packet));
         ctx.get().setPacketHandled(true);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void clientHandler(TameDataSyncPacket packet) {
+        Entity entity = null;
+        if (Minecraft.getInstance().level != null) {
+            entity = Minecraft.getInstance().level.getEntity(packet.entityId);
+        }
+        if (entity != null) {
+            ITameData tameData = entity.getCapability(TAME_DATA).orElse(new TameData());
+            tameData.setTamed(packet.tamed);
+            tameData.setOwner(packet.owner);
+        }
     }
 }

@@ -22,13 +22,13 @@ public class FairyOwnerHurtTargetGoal extends TargetGoal {
 
     private LivingEntity lastHurt;
 
-    public FairyOwnerHurtTargetGoal(Mob mob){
+    public FairyOwnerHurtTargetGoal(Mob mob) {
         super(mob, false);
         this.setFlags(EnumSet.of(Flag.TARGET));
     }
 
     @Override
-    public boolean canUse(){
+    public boolean canUse() {
         ITameData tameData = mob.getCapability(TAME_DATA, null).orElse(new TameData());
         IActState actState = mob.getCapability(ACT_STATE, null).orElse(new ActState());
         if (!actState.attackMode().equals(AttackModes.PASSIVE)) return false;
@@ -40,17 +40,17 @@ public class FairyOwnerHurtTargetGoal extends TargetGoal {
         lastHurt = owner.getLastHurtMob();
         if (lastHurt == null) return false;
 
-        if(lastHurt.getClass().equals(EntityFairy.class)){
+        if (lastHurt.getClass().equals(EntityFairy.class)) {
             ITameData targetData = lastHurt.getCapability(TAME_DATA, null).orElse(new TameData());
             if (targetData.tamed() && targetData.owner() != null && targetData.owner().equals(ownerUUID))
                 return false;//同一个主人的女仆妖精不会内斗
         }
 
-        return lastHurt != mob && !(lastHurt instanceof EntityMaid) &&  lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
+        return lastHurt != mob && !(lastHurt instanceof EntityMaid) && lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
     }
 
     @Override
-    public void start(){
+    public void start() {
         mob.setTarget(lastHurt);
         super.start();
     }

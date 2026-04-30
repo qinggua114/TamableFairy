@@ -14,7 +14,7 @@ public class ActStateProvider implements ICapabilityProvider, INBTSerializable<C
     private final ActState actState = new ActState();
     private final LazyOptional<IActState> optional = LazyOptional.of(() -> actState);
 
-    public ActStateProvider(){
+    public ActStateProvider() {
     }
 
     @Override

@@ -14,7 +14,7 @@ public class TameDataProvider implements ICapabilityProvider, INBTSerializable<C
     private final TameData tameData = new TameData();
     private final LazyOptional<ITameData> optional = LazyOptional.of(() -> tameData);
 
-    public TameDataProvider(){
+    public TameDataProvider() {
     }
 
     @Override

@@ -15,12 +15,12 @@ import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AttachCapabilities {
 
-    public AttachCapabilities(){
+    public AttachCapabilities() {
     }
 
     @SubscribeEvent
-    public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event){
-        if (event.getObject().getClass().equals(EntityFairy.class)){
+    public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
+        if (event.getObject().getClass().equals(EntityFairy.class)) {
             event.addCapability(new ResourceLocation(MODID, "tamedata"), new TameDataProvider());
             event.addCapability(new ResourceLocation(MODID, "act_state"), new ActStateProvider());
         }

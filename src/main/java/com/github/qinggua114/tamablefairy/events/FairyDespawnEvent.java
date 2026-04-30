@@ -16,13 +16,13 @@ import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class FairyDespawnEvent {
 
-    public FairyDespawnEvent(){
+    public FairyDespawnEvent() {
     }
 
     @SubscribeEvent
-    public static void onFairyDespawn(MobSpawnEvent.AllowDespawn event){//解决在切换至和平模式后已驯服的女仆妖精消失的问题
+    public static void onFairyDespawn(MobSpawnEvent.AllowDespawn event) {//解决在切换至和平模式后已驯服的女仆妖精消失的问题
         Entity entity = event.getEntity();
-        if (entity.level().isClientSide || !(entity.getClass().equals(EntityFairy.class)) ) return;
+        if (entity.level().isClientSide || !(entity.getClass().equals(EntityFairy.class))) return;
 
         ITameData tameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!tameData.tamed()) return;

@@ -14,11 +14,11 @@ import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AvoidBeingTargeted {
-    public AvoidBeingTargeted(){
+    public AvoidBeingTargeted() {
     }
 
     @SubscribeEvent
-    public static void onTargetSet(LivingChangeTargetEvent event){
+    public static void onTargetSet(LivingChangeTargetEvent event) {
         //防止驯服的女仆妖精被铁傀儡等主动攻击敌对生物的生物设为目标
         Entity entity = event.getEntity();
         if (entity.level().isClientSide) return;
@@ -29,16 +29,16 @@ public class AvoidBeingTargeted {
         ITameData targetTameData = target.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!targetTameData.tamed()) return;
 
-        if (entity instanceof Monster && !(entity.getClass().equals(EntityFairy.class))) return;//如果生物是怪物,且不是女仆妖精,保留目标设定事件
+        if (entity instanceof Monster && !(entity.getClass().equals(EntityFairy.class)))
+            return;//如果生物是怪物,且不是女仆妖精,保留目标设定事件
 
         //如果是同一个主人的女仆妖精,取消事件
-        if (entity.getClass().equals(EntityFairy.class)){
+        if (entity.getClass().equals(EntityFairy.class)) {
             ITameData entityTameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
 
             if (targetTameData.owner() == entityTameData.owner()) {
                 event.setCanceled(true);
-            }
-            else {
+            } else {
                 return;//主人不同则不取消
             }
         }

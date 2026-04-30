@@ -14,14 +14,16 @@ import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Capabilities {
-    public static final Capability<ITameData> TAME_DATA = CapabilityManager.get(new CapabilityToken<>() {});
-    public static final Capability<IActState> ACT_STATE = CapabilityManager.get(new CapabilityToken<>() {});
+    public static final Capability<ITameData> TAME_DATA = CapabilityManager.get(new CapabilityToken<>() {
+    });
+    public static final Capability<IActState> ACT_STATE = CapabilityManager.get(new CapabilityToken<>() {
+    });
 
-    public Capabilities(){
+    public Capabilities() {
     }
 
     @SubscribeEvent
-    public static void registerCapabilities(RegisterCapabilitiesEvent event){
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.register(ITameData.class);
         event.register(IActState.class);
     }

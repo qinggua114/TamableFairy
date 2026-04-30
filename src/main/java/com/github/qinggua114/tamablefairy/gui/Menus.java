@@ -7,7 +7,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-
 import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 
 public class Menus {

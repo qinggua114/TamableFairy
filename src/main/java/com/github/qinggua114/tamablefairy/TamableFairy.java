@@ -1,7 +1,6 @@
 package com.github.qinggua114.tamablefairy;
 
 import com.github.qinggua114.tamablefairy.gui.Menus;
-import com.github.qinggua114.tamablefairy.networks.NetWorks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -10,7 +9,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class TamableFairy {
     public static final String MODID = "tamablefairy";
 
-    public TamableFairy(){
+    public TamableFairy() {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         Menus.register(modBus);

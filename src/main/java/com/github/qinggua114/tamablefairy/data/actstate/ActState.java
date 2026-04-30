@@ -1,11 +1,9 @@
 package com.github.qinggua114.tamablefairy.data.actstate;
 
 import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
-import com.github.qinggua114.tamablefairy.networks.NetWorks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.network.PacketDistributor;
 
 public class ActState implements IActState, INBTSerializable<CompoundTag> {
     private AttackModes attackMode = AttackModes.PASSIVE;

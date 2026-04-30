@@ -13,17 +13,17 @@ import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 @Mod.EventBusSubscriber
 public class TameStateUpdate {
-    public TameStateUpdate(){
+    public TameStateUpdate() {
     }
 
     @SubscribeEvent
-    public static void onJoinLevel(EntityJoinLevelEvent event){
+    public static void onJoinLevel(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
         if (event.getLevel().isClientSide) return;
         if (!(entity.getClass().equals(EntityFairy.class))) return;
 
         ITameData tameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
-        if (tameData.tamed()){
+        if (tameData.tamed()) {
             ModifyAI.letTamed((EntityFairy) entity);
         }
 

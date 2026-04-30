@@ -19,16 +19,16 @@ import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TrackingEntityEvent {
-    public TrackingEntityEvent(){
+    public TrackingEntityEvent() {
     }
 
     @SubscribeEvent
-    public static void onStartTrackingFairies(PlayerEvent.StartTracking event){
+    public static void onStartTrackingFairies(PlayerEvent.StartTracking event) {
         Player player = event.getEntity();
         if (player.level().isClientSide) return;
 
         Entity entity = event.getTarget();
-        if (!( entity.getClass().equals(EntityFairy.class) )) return;
+        if (!(entity.getClass().equals(EntityFairy.class))) return;
 
         ITameData tameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
         if (!tameData.tamed()) return;

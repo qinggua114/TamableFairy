@@ -22,13 +22,13 @@ public class FairyOwnerHurtByTargetGoal extends TargetGoal {
 
     private LivingEntity lastHurtBy;
 
-    public FairyOwnerHurtByTargetGoal(Mob mob){
+    public FairyOwnerHurtByTargetGoal(Mob mob) {
         super(mob, false);
         this.setFlags(EnumSet.of(Flag.TARGET));
     }
 
     @Override
-    public boolean canUse(){
+    public boolean canUse() {
         ITameData tameData = mob.getCapability(TAME_DATA, null).orElse(new TameData());
         IActState actState = mob.getCapability(ACT_STATE, null).orElse(new ActState());
         if (!actState.attackMode().equals(AttackModes.PASSIVE)) return false;
@@ -40,7 +40,7 @@ public class FairyOwnerHurtByTargetGoal extends TargetGoal {
         lastHurtBy = owner.getLastHurtByMob();
         if (lastHurtBy == null) return false;
 
-        if(lastHurtBy.getClass().equals(EntityFairy.class)){
+        if (lastHurtBy.getClass().equals(EntityFairy.class)) {
             ITameData targetData = lastHurtBy.getCapability(TAME_DATA).orElse(new TameData());
             if (targetData.tamed() && targetData.owner() != null && targetData.owner().equals(ownerUUID))
                 return false;//同一个主人的女仆妖精不会内斗
@@ -50,7 +50,7 @@ public class FairyOwnerHurtByTargetGoal extends TargetGoal {
     }
 
     @Override
-    public void start(){
+    public void start() {
         mob.setTarget(lastHurtBy);
         super.start();
     }

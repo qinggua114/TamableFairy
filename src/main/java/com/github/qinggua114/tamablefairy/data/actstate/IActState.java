@@ -5,11 +5,17 @@ import net.minecraft.world.phys.Vec3;
 
 public interface IActState {
     AttackModes attackMode();
+
     boolean followOwnerEnabled();
+
     boolean moveAroundEnabled();
+
     int followDistance();
+
     int moveRange();
+
     Vec3 actRangeCenter();
+
     void setData(AttackModes attackMode,
                  boolean followOwnerEnabled,
                  boolean moveAroundEnabled,

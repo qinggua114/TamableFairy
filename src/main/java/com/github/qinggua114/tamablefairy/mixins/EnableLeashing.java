@@ -16,9 +16,9 @@ public class EnableLeashing {
     @Inject(method = "canBeLeashed", at = @At("RETURN"), cancellable = true)
     private void modifyCanBeLeashed(CallbackInfoReturnable<Boolean> cir) {
         boolean originalRtnVal = cir.getReturnValue();
-        if (!originalRtnVal){
+        if (!originalRtnVal) {
             Mob mob = (Mob) (Object) this;
-            if (mob.getClass().equals(EntityFairy.class)){
+            if (mob.getClass().equals(EntityFairy.class)) {
                 ITameData tameData = mob.getCapability(TAME_DATA).orElse(new TameData());
                 System.out.println("Mixin: fairy=" + mob + ", tamed=" + tameData.tamed() + ", owner=" + tameData.owner());
                 if (tameData.tamed()) cir.setReturnValue(true);
