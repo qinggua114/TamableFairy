@@ -1,4 +1,13 @@
 {
   "message.on_tamed_fairy_death": "%s was killed by %s",
-  "message.on_tamed_fairy_death.without_killer": "%s was killed"
+  "message.on_tamed_fairy_death.without_killer": "%s was killed",
+  "btn.attack_mode": "Attack Mode:%s",
+  "text.active": "§eActive",
+  "text.passive": "§aPassive",
+  "text.disabled": "§cDisabled",
+  "text.enabled": "§eEnabled",
+  "btn.enable_follow": "Follow Owner:%s",
+  "btn.enable_move_around": "Move Around：%s",
+  "slider.follow_range": "Follow Range:%s",
+  "slider.move_range": "Move Range:%s"
 }

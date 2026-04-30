@@ -1,4 +1,4 @@
-package com.github.qinggua114.tamablefairy.data;
+package com.github.qinggua114.tamablefairy.data.tamedata;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;

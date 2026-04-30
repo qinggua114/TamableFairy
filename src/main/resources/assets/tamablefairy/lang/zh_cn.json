@@ -1,4 +1,13 @@
 {
   "message.on_tamed_fairy_death": "%s 被 %s 杀死了",
-  "message.on_tamed_fairy_death.without_killer": "%s 被杀死了"
+  "message.on_tamed_fairy_death.without_killer": "%s 被杀死了",
+  "btn.attack_mode": "攻击模式：%s",
+  "text.active": "§e主动",
+  "text.passive": "§a被动",
+  "text.disabled": "§c禁用",
+  "text.enabled": "§e启用",
+  "btn.enable_follow": "跟随主人：%s",
+  "btn.enable_move_around": "游荡：%s",
+  "slider.follow_range": "跟随距离：§e%s",
+  "slider.move_range": "活动范围：§e%s"
 }

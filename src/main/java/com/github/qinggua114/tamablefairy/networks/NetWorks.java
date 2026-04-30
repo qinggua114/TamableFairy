@@ -6,9 +6,9 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class NetWorks {
-    public static final String NETWORK_VERSION = "1.0";
+    public static final String NETWORK_VERSION = "2.0";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            ResourceLocation.fromNamespaceAndPath(TamableFairy.MODID, "main"),
+            new ResourceLocation(TamableFairy.MODID, "main"),
             () -> NETWORK_VERSION,
             version -> version.equals(NETWORK_VERSION),
             version -> version.equals(NETWORK_VERSION)
@@ -18,6 +18,19 @@ public class NetWorks {
         CHANNEL.registerMessage(0, TameDataSyncPacket.class,
                 TameDataSyncPacket::encode,
                 TameDataSyncPacket::decode,
-                TameDataSyncPacket::handle);
+                TameDataSyncPacket::handler
+        );
+
+        CHANNEL.registerMessage(1, C2SFairyGuiPacket.class,
+                C2SFairyGuiPacket::encode,
+                C2SFairyGuiPacket::decode,
+                C2SFairyGuiPacket::handler
+        );
+
+        CHANNEL.registerMessage(2, ActStateSyncPacket.class,
+                ActStateSyncPacket::encode,
+                ActStateSyncPacket::decode,
+                ActStateSyncPacket::handler
+        );
     }
 }

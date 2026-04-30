@@ -1,7 +1,8 @@
 package com.github.qinggua114.tamablefairy.events;
 
 
-import com.github.qinggua114.tamablefairy.data.TameDataProvider;
+import com.github.qinggua114.tamablefairy.data.actstate.ActStateProvider;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameDataProvider;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -20,7 +21,8 @@ public class AttachCapabilities {
     @SubscribeEvent
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event){
         if (event.getObject().getClass().equals(EntityFairy.class)){
-            event.addCapability(ResourceLocation.fromNamespaceAndPath(MODID, "tamedata"), new TameDataProvider());
+            event.addCapability(new ResourceLocation(MODID, "tamedata"), new TameDataProvider());
+            event.addCapability(new ResourceLocation(MODID, "act_state"), new ActStateProvider());
         }
     }
 }

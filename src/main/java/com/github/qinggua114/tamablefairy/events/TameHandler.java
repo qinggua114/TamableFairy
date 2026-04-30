@@ -1,7 +1,7 @@
 package com.github.qinggua114.tamablefairy.events;
 
-import com.github.qinggua114.tamablefairy.data.ITameData;
-import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.ModifyAI;
 import com.github.qinggua114.tamablefairy.networks.NetWorks;
 import com.github.qinggua114.tamablefairy.networks.TameDataSyncPacket;
@@ -10,7 +10,6 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -40,7 +39,7 @@ public class TameHandler {
             if (event.getItemStack().is(Items.CAKE)){
                 tameData.setTamed(true);
                 tameData.setOwner(player.getUUID());
-                ModifyAI.letTamed((Mob) target);
+                ModifyAI.letTamed((EntityFairy) target);
                 NetWorks.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> target),
                         new TameDataSyncPacket(target.getId(), tameData.tamed(), player.getUUID()));
                 spawnParticle((ServerLevel) event.getLevel());

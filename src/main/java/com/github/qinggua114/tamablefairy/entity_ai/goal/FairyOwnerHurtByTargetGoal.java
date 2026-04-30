@@ -1,7 +1,10 @@
 package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
-import com.github.qinggua114.tamablefairy.data.ITameData;
-import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.data.actstate.ActState;
+import com.github.qinggua114.tamablefairy.data.actstate.IActState;
+import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
+import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,13 +15,14 @@ import net.minecraft.world.entity.player.Player;
 import java.util.EnumSet;
 import java.util.UUID;
 
+import static com.github.qinggua114.tamablefairy.data.Capabilities.ACT_STATE;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
-public class CustomOwnerHurtByTargetGoal extends TargetGoal {
+public class FairyOwnerHurtByTargetGoal extends TargetGoal {
 
     private LivingEntity lastHurtBy;
 
-    public CustomOwnerHurtByTargetGoal(Mob mob){
+    public FairyOwnerHurtByTargetGoal(Mob mob){
         super(mob, false);
         this.setFlags(EnumSet.of(Flag.TARGET));
     }
@@ -26,6 +30,8 @@ public class CustomOwnerHurtByTargetGoal extends TargetGoal {
     @Override
     public boolean canUse(){
         ITameData tameData = mob.getCapability(TAME_DATA, null).orElse(new TameData());
+        IActState actState = mob.getCapability(ACT_STATE, null).orElse(new ActState());
+        if (!actState.attackMode().equals(AttackModes.PASSIVE)) return false;
         UUID ownerUUID = tameData.owner();
         if (ownerUUID == null) return false;
         Player owner = mob.level().getPlayerByUUID(ownerUUID);

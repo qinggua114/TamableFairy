@@ -1,7 +1,7 @@
 package com.github.qinggua114.tamablefairy.events;
 
-import com.github.qinggua114.tamablefairy.data.ITameData;
-import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;

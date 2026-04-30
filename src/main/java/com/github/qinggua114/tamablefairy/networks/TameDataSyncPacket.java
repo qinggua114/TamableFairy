@@ -1,10 +1,11 @@
 package com.github.qinggua114.tamablefairy.networks;
 
-import com.github.qinggua114.tamablefairy.data.ITameData;
-import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
+import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.UUID;
@@ -23,22 +24,23 @@ public class TameDataSyncPacket {
         this.owner = owner;
     }
 
-    public static void encode(TameDataSyncPacket packet, FriendlyByteBuf buf) {
-        buf.writeInt(packet.entityId);
-        buf.writeBoolean(packet.tamed);
-        buf.writeUUID(packet.owner);
+    public static void encode(TameDataSyncPacket packet, FriendlyByteBuf byteBuf) {
+        byteBuf.writeInt(packet.entityId);
+        byteBuf.writeBoolean(packet.tamed);
+        byteBuf.writeUUID(packet.owner);
     }
 
-    public static TameDataSyncPacket decode(FriendlyByteBuf buf) {
-        int entityId = buf.readInt();
-        boolean tamed = buf.readBoolean();
-        UUID owner = buf.readUUID();
+    public static TameDataSyncPacket decode(FriendlyByteBuf byteBuf) {
+        int entityId = byteBuf.readInt();
+        boolean tamed = byteBuf.readBoolean();
+        UUID owner = byteBuf.readUUID();
         return new TameDataSyncPacket(entityId, tamed, owner);
     }
 
-    public static void handle(TameDataSyncPacket packet, Supplier<NetworkEvent.Context> ctx) {
+    public static void handler(TameDataSyncPacket packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() ->
         {
+            if (FMLLoader.getDist().isDedicatedServer()) return;
             Entity entity = null;
             if (Minecraft.getInstance().level != null) {
                 entity = Minecraft.getInstance().level.getEntity(packet.entityId);

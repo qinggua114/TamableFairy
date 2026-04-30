@@ -1,11 +1,10 @@
 package com.github.qinggua114.tamablefairy.events;
 
-import com.github.qinggua114.tamablefairy.data.ITameData;
-import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.ModifyAI;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +24,7 @@ public class TameStateUpdate {
 
         ITameData tameData = entity.getCapability(TAME_DATA, null).orElse(new TameData());
         if (tameData.tamed()){
-            ModifyAI.letTamed((Mob) entity);
+            ModifyAI.letTamed((EntityFairy) entity);
         }
 
     }

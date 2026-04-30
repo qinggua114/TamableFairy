@@ -1,5 +1,6 @@
-package com.github.qinggua114.tamablefairy.data;
+package com.github.qinggua114.tamablefairy.data.tamedata;
 
+import com.github.qinggua114.tamablefairy.data.Capabilities;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class TameDataProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
     private final TameData tameData = new TameData();
-    private final LazyOptional<ITameData> optional = LazyOptional.of( () -> tameData);
+    private final LazyOptional<ITameData> optional = LazyOptional.of(() -> tameData);
 
     public TameDataProvider(){
     }

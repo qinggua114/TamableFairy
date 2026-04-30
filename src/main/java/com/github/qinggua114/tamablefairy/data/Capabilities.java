@@ -1,6 +1,8 @@
 package com.github.qinggua114.tamablefairy.data;
 
 
+import com.github.qinggua114.tamablefairy.data.actstate.IActState;
+import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -13,6 +15,7 @@ import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Capabilities {
     public static final Capability<ITameData> TAME_DATA = CapabilityManager.get(new CapabilityToken<>() {});
+    public static final Capability<IActState> ACT_STATE = CapabilityManager.get(new CapabilityToken<>() {});
 
     public Capabilities(){
     }
@@ -20,6 +23,7 @@ public class Capabilities {
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
         event.register(ITameData.class);
+        event.register(IActState.class);
     }
 
 }
