@@ -24,7 +24,7 @@ public class FairyMenuProvider implements MenuProvider {
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+    public @Nullable AbstractContainerMenu createMenu(int containerId, @NotNull Inventory inventory, @NotNull Player player) {
         return new FairyGuiMenu(containerId, inventory, fairy);
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import static com.github.qinggua114.tamablefairy.gui.Menus.FAIRY_GUI_MENU;
 
@@ -40,7 +41,7 @@ public class FairyGuiMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         Slot slot = this.slots.get(index);
         if (!slot.hasItem()) return ItemStack.EMPTY;
 
@@ -61,7 +62,7 @@ public class FairyGuiMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         return true;
     }
 }

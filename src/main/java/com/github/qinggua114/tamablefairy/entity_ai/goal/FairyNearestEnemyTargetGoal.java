@@ -2,6 +2,7 @@ package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
 import com.github.qinggua114.tamablefairy.data.actstate.ActState;
 import com.github.qinggua114.tamablefairy.data.actstate.IActState;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
 import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +16,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import static com.github.qinggua114.tamablefairy.data.Capabilities.ACT_STATE;
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 public class FairyNearestEnemyTargetGoal extends TargetGoal {
     private final TargetingConditions targetConditions;
@@ -42,6 +44,8 @@ public class FairyNearestEnemyTargetGoal extends TargetGoal {
         AABB searchArea = this.getTargetSearchArea(this.getFollowDistance());
         List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, searchArea, (entity) -> entity instanceof Enemy);
         target = level.getNearestEntity(entities, this.targetConditions, mob, mob.getX(), mob.getEyeY(), mob.getZ());
+        if (target == null) return;
+        if (target.getCapability(TAME_DATA).orElse(new TameData()).tamed()) target = null;
     }
 
     public void start() {
