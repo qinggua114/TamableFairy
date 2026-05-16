@@ -3,6 +3,7 @@ package com.github.qinggua114.tamablefairy.entity_ai.goal;
 import com.github.qinggua114.tamablefairy.data.ActState;
 import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
@@ -15,6 +16,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import static com.github.qinggua114.tamablefairy.data.Attachments.ACT_STATE;
+import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
 
 public class FairyNearestEnemyTargetGoal extends TargetGoal {
     private final TargetingConditions targetConditions;
@@ -41,7 +43,10 @@ public class FairyNearestEnemyTargetGoal extends TargetGoal {
         Level level = mob.level();
         AABB searchArea = this.getTargetSearchArea(this.getFollowDistance());
         List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, searchArea, (entity) -> entity instanceof Enemy);
+        entities.removeIf(entity -> entity.getData(TAME_DATA).tamed());
         target = level.getNearestEntity(entities, this.targetConditions, mob, mob.getX(), mob.getEyeY(), mob.getZ());
+        if (target == null) return;
+        if (target.getData(TAME_DATA).tamed()) target = null;
     }
 
     public void start() {

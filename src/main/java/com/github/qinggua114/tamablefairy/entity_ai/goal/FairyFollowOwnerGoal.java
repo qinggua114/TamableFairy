@@ -78,5 +78,8 @@ public class FairyFollowOwnerGoal extends Goal {
             timeToRePathing = 10;
             mob.getNavigation().moveTo(owner, speed);
         }
+
+        ActState newActState = new ActState(actState.attackMode(),actState.followOwnerEnabled(), actState.moveAroundEnabled(), actState.followDistance(), actState.moveRange(), owner.getEyePosition());
+        mob.setData(ACT_STATE, newActState);
     }
 }

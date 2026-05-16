@@ -2,7 +2,9 @@ package com.github.qinggua114.tamablefairy.networks;
 
 import com.github.qinggua114.tamablefairy.data.ActState;
 import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.entity_ai.AttackModes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -47,5 +49,7 @@ public class NetWorks {
                 payload.actRangeCenter()
         );
         entity.setData(ACT_STATE, newData);
+
+        if (entity.getData(ACT_STATE).attackMode().equals(AttackModes.DISABLED)) ((Mob) entity).setTarget(null);
     }
 }

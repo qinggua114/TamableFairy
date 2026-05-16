@@ -49,7 +49,7 @@ public class InteractEvents {
         if (target.getHealth() == target.getMaxHealth()) return;//满血时不继续回血
         target.heal(2);
         spawnParticle(ParticleTypes.HEART, target.getX(), target.getY() + 0.7, target.getZ(), (ServerLevel) event.getLevel());
-        if (player.getAbilities().instabuild) return;
+        if (player.isCreative()) return;
         event.getItemStack().shrink(1);
 
     }
