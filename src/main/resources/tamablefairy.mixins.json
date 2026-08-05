@@ -4,6 +4,7 @@
   "package": "com.github.qinggua114.tamablefairy.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AllowPlayerResting",
     "EnableLeashing"
   ],
   "client": [

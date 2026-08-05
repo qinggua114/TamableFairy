@@ -1,16 +1,19 @@
 package com.github.qinggua114.tamablefairy.events;
 
 import com.github.qinggua114.tamablefairy.data.TameData;
+import com.github.qinggua114.tamablefairy.utils.CheckTameState;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import static com.github.qinggua114.tamablefairy.data.Attachments.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.gamerules.TamableFairyGameRules.ALLOW_OWNER_HURT_FAIRY;
 
 @EventBusSubscriber
 public class DamageEvents {
@@ -38,7 +41,7 @@ public class DamageEvents {
     }
 
     @SubscribeEvent
-    public static void onPlayerDamage(LivingIncomingDamageEvent event) {
+    public static void onHurtPlayer(LivingIncomingDamageEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         Entity source = event.getSource().getEntity();
         if (source == null) return;
@@ -50,6 +53,21 @@ public class DamageEvents {
 
         if (player.equals(owner)) event.setCanceled(true);//如果弹幕打到自己的主人,则忽略伤害
 
+    }
+
+    @SubscribeEvent
+    public static void onDamageFromOwner(LivingIncomingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (!CheckTameState.isFairy(entity)) return;
+        if (!CheckTameState.isTamed((EntityFairy) entity)) return;
+        Entity sourceEntity = event.getSource().getEntity();
+        if (!(sourceEntity instanceof Player) || ((Player) sourceEntity).isCreative()) return;
+        if (!CheckTameState.ownerIs((EntityFairy) entity, (Player) sourceEntity)) return;
+        GameRules gameRules = entity.level().getGameRules();
+        System.out.println(gameRules.getBoolean(ALLOW_OWNER_HURT_FAIRY));
+        if (gameRules.getBoolean(ALLOW_OWNER_HURT_FAIRY)) return;
+        System.out.println("Canceled!");
+        event.setCanceled(true);
     }
 
     @SubscribeEvent

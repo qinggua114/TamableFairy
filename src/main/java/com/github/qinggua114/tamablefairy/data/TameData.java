@@ -11,15 +11,19 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-public record TameData(boolean tamed, UUID owner) {
+public record TameData(boolean tamed, UUID owner, String ownerName) {
 
     //序列化
     public static final Codec<TameData> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.BOOL.fieldOf("tamed").forGetter(TameData::tamed),
                     Codec.STRING.xmap(UUID::fromString, UUID::toString).optionalFieldOf("owner")
-                            .forGetter(td -> Optional.ofNullable(td.owner()))
-            ).apply(instance, (tamed, ownerOpt) -> new TameData(tamed, ownerOpt.orElse(null)))
+                            .forGetter(tameData -> Optional.ofNullable(tameData.owner())),
+                    Codec.STRING.optionalFieldOf("owner_name")
+                            .forGetter(tameData -> Optional.ofNullable(tameData.ownerName()))
+                    )
+                    .apply(instance, (tamed, ownerOpt, ownerName) ->
+                    new TameData(tamed, ownerOpt.orElse(null), ownerName.orElse(null)))
     );
 
     //网络同步
@@ -34,7 +38,8 @@ public record TameData(boolean tamed, UUID owner) {
                 Long leastSigBits = ByteBufCodecs.VAR_LONG.decode(byteBuf);
                 owner = new UUID(mostSigBits, leastSigBits);
             }
-            return new TameData(tamed, owner);
+            String ownerName = ByteBufCodecs.STRING_UTF8.decode(byteBuf);
+            return new TameData(tamed, owner, ownerName);
         }
 
         @Override
@@ -45,8 +50,12 @@ public record TameData(boolean tamed, UUID owner) {
                 ByteBufCodecs.VAR_LONG.encode(byteBuf, tameData.owner.getMostSignificantBits());
                 ByteBufCodecs.VAR_LONG.encode(byteBuf, tameData.owner.getLeastSignificantBits());
             }
+            if (tameData.ownerName != null)
+                ByteBufCodecs.STRING_UTF8.encode(byteBuf, tameData.ownerName());
+            else
+                ByteBufCodecs.STRING_UTF8.encode(byteBuf, "Unknown");
         }
     };
 
-    public static final TameData EMPTY = new TameData(false, null);//创建默认空数据
+    public static final TameData EMPTY = new TameData(false, null, null);//创建默认空数据
 }
