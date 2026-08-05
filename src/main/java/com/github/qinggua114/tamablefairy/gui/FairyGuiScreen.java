@@ -92,7 +92,9 @@ public class FairyGuiScreen extends AbstractContainerScreen<FairyGuiMenu> {
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, this.leftPos + 6, this.topPos + 6, 20, mouseX, mouseY, fairy);
+        int centerX = (this.width - this.imageWidth) / 2 + 25;
+        int centerY = (this.height - this.imageHeight) / 2 + 60;
+        InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, centerX, centerY, 20, -(mouseX - centerX), -(mouseY - centerY), fairy);
         renderTooltip(guiGraphics, mouseX, mouseY);
     }
 

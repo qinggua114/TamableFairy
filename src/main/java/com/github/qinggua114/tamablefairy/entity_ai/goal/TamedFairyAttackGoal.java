@@ -47,7 +47,7 @@ public class TamedFairyAttackGoal extends Goal {
         IActState actState = entityFairy.getCapability(ACT_STATE).orElse(new ActState());
         if (target != null && target.isAlive()) {
             this.entityFairy.getLookControl().setLookAt(target, 30.0F, 30.0F);
-            double distance = (double)this.entityFairy.distanceTo(target);
+            double distance = this.entityFairy.distanceTo(target);
             if (this.entityFairy.getSensing().hasLineOfSight(target) && distance >= this.minDistance) {
                 if (actState.moveAroundEnabled()) {
                     this.entityFairy.getNavigation().moveTo(target, this.speedIn);
@@ -57,10 +57,10 @@ public class TamedFairyAttackGoal extends Goal {
                 this.entityFairy.getNavigation().stop();
                 ++this.withInRangeTime;
                 Vec3 motion = this.entityFairy.getDeltaMovement();
-                this.entityFairy.setDeltaMovement(motion.x, (double)0.0F, motion.z);
+                this.entityFairy.setDeltaMovement(motion.x, 0.0F, motion.z);
                 this.entityFairy.setNoGravity(true);
                 if (this.withInRangeTime > MAX_WITH_IN_RANGE_TIME) {
-                    float percent = (float)(distance / this.minDistance);
+                    float percent = (float) (distance / this.minDistance);
                     this.entityFairy.m_6504_(target, 1.0F - percent);
                     this.withInRangeTime = 0;
                 }
@@ -75,12 +75,10 @@ public class TamedFairyAttackGoal extends Goal {
         IActState actState = entityFairy.getCapability(ACT_STATE).orElse(new ActState());
         if (target == null || !target.isAlive()) return false;
 
-        boolean isPlayerAndCanNotBeAttacked = target instanceof Player && (target.isSpectator() || ((Player)target).isCreative());
+        boolean isPlayerAndCanNotBeAttacked = target instanceof Player && (target.isSpectator() || ((Player) target).isCreative());
         if (isPlayerAndCanNotBeAttacked) return false;
 
-        if (target.getCapability(TAME_DATA).orElse(new TameData()).tamed()) return false;
-
-        return true;
+        return !target.getCapability(TAME_DATA).orElse(new TameData()).tamed();
     }
 
     public void stop() {

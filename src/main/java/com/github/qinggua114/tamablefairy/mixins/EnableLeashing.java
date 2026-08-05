@@ -20,7 +20,6 @@ public class EnableLeashing {
             Mob mob = (Mob) (Object) this;
             if (mob.getClass().equals(EntityFairy.class)) {
                 ITameData tameData = mob.getCapability(TAME_DATA).orElse(new TameData());
-                System.out.println("Mixin: fairy=" + mob + ", tamed=" + tameData.tamed() + ", owner=" + tameData.owner());
                 if (tameData.tamed()) cir.setReturnValue(true);
             }
         }

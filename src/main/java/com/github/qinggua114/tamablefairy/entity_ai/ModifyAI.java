@@ -44,13 +44,13 @@ public class ModifyAI {
         fairy.targetSelector.addGoal(1, new FairyOwnerHurtByTargetGoal(fairy));
         fairy.targetSelector.addGoal(2, new FairyOwnerHurtTargetGoal(fairy));
         //主动攻击
-        fairy.targetSelector.addGoal(1, new FairyNearestEnemyTargetGoal(fairy));
+        fairy.targetSelector.addGoal(2, new FairyNearestEnemyTargetGoal(fairy));
 
         //更改属性,稍微加强一点,要不太不抗揍了
-        AttributeInstance maxHealth = fairy.getAttribute(Attributes.ARMOR);
-        if (maxHealth != null) maxHealth.setBaseValue(5);
-        //AttributeInstance attackDamage = fairy.getAttribute(Attributes.ATTACK_DAMAGE);
-        //if(attackDamage != null) attackDamage.setBaseValue(1145);弹幕伤害是硬编码的,不能通过属性修改(悲)(才不是我懒得Mixin!)
+        AttributeInstance armor = fairy.getAttribute(Attributes.ARMOR);
+        if (armor != null) armor.setBaseValue(5);
+        AttributeInstance maxHealth = fairy.getAttribute(Attributes.MAX_HEALTH);
+        if (maxHealth != null) maxHealth.setBaseValue(20);
         AttributeInstance flyingSpeed = fairy.getAttribute(Attributes.FLYING_SPEED);
         if (flyingSpeed != null) flyingSpeed.setBaseValue(0.7);
         AttributeInstance movementSpeed = fairy.getAttribute(Attributes.MOVEMENT_SPEED);

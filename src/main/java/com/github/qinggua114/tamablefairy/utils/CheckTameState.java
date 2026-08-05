@@ -1,0 +1,58 @@
+package com.github.qinggua114.tamablefairy.utils;
+
+import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
+import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
+import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeConfig;
+import net.minecraftforge.server.ServerLifecycleHooks;
+
+import java.util.UUID;
+
+import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
+
+public class CheckTameState {
+    public CheckTameState() {
+    }
+
+    public static boolean isFairy(Entity entity) {
+        return entity.getClass().equals(EntityFairy.class);
+    }
+
+    public static boolean isTamed(EntityFairy fairy) {
+        ITameData tameData = fairy.getCapability(TAME_DATA, null).orElse(new TameData());
+        return tameData.tamed();
+    }
+
+    public static boolean isTamedFairy(Entity entity) {
+        if (!isFairy(entity)) return false;
+        return isTamed((EntityFairy) entity);
+    }
+
+    public static UUID getOwnerID(EntityFairy fairy) {
+        ITameData tameData = fairy.getCapability(TAME_DATA, null).orElse(new TameData());
+        return tameData.owner();
+    }
+
+    public static Player getOwner(EntityFairy fairy) {
+        ITameData tameData = fairy.getCapability(TAME_DATA, null).orElse(new TameData());
+        Level level = fairy.level();
+        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        if (server == null) return null;
+        return server.getPlayerList().getPlayer(tameData.owner());
+    }
+
+    public static String getOwnerName(EntityFairy fairy) {
+        ITameData tameData = fairy.getCapability(TAME_DATA, null).orElse(new TameData());
+        return tameData.ownerName();
+    }
+
+    public static boolean ownerIs(EntityFairy fairy, Player player) {
+        UUID ownerID = getOwnerID(fairy);
+        UUID playerID = player.getUUID();
+        return ownerID.equals(playerID);
+    }
+}

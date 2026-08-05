@@ -1,5 +1,6 @@
 package com.github.qinggua114.tamablefairy;
 
+import com.github.qinggua114.tamablefairy.gamerules.TamableFairyGameRules;
 import com.github.qinggua114.tamablefairy.gui.Menus;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -13,5 +14,7 @@ public class TamableFairy {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         Menus.register(modBus);
+
+        new TamableFairyGameRules();
     }
 }

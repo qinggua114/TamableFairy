@@ -9,5 +9,6 @@
   "btn.enable_follow": "Follow Owner:%s",
   "btn.enable_move_around": "Move Around：%s",
   "slider.follow_range": "Follow Range:%s",
-  "slider.move_range": "Move Range:%s"
+  "slider.move_range": "Move Range:%s",
+  "tooltip.owner": "Owner:%s"
 }

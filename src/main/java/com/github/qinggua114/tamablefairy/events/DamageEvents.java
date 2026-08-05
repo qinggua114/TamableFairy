@@ -2,17 +2,21 @@ package com.github.qinggua114.tamablefairy.events;
 
 import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
 import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
+import com.github.qinggua114.tamablefairy.utils.CheckTameState;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
+import static com.github.qinggua114.tamablefairy.gamerules.TamableFairyGameRules.ALLOW_OWNER_HURT_FAIRY;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DamageEvents {
@@ -21,10 +25,10 @@ public class DamageEvents {
     }
 
     @SubscribeEvent
-    public static void onTamedFairyDamage(LivingDamageEvent event) {
+    public static void onTamedFairyDamage(LivingAttackEvent event) {
         //如果是同一个主人的女仆妖精,则忽略伤害
         LivingEntity entity = event.getEntity();
-        if (!(entity.getClass().equals(EntityFairy.class)) || entity.level().isClientSide) return;
+        if (!(entity.getClass().equals(EntityFairy.class))) return;
         Entity source = event.getSource().getEntity();
         if (source == null) return;
         if (!(source.getClass().equals(EntityFairy.class))) return;
@@ -40,7 +44,7 @@ public class DamageEvents {
     }
 
     @SubscribeEvent
-    public static void onPlayerDamage(LivingDamageEvent event) {
+    public static void onHurtPlayer(LivingAttackEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         Entity source = event.getSource().getEntity();
         if (source == null) return;
@@ -52,6 +56,21 @@ public class DamageEvents {
 
         if (player.equals(owner)) event.setCanceled(true);//如果弹幕打到自己的主人,则忽略伤害
 
+    }
+
+    @SubscribeEvent
+    public static void onDamageFromOwner(LivingAttackEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (!CheckTameState.isFairy(entity)) return;
+        if (!CheckTameState.isTamed((EntityFairy) entity)) return;
+        Entity sourceEntity = event.getSource().getEntity();
+        if (!(sourceEntity instanceof Player) || ((Player) sourceEntity).isCreative()) return;
+        if (!CheckTameState.ownerIs((EntityFairy) entity, (Player) sourceEntity)) return;
+        GameRules gameRules = entity.level().getGameRules();
+        System.out.println(gameRules.getBoolean(ALLOW_OWNER_HURT_FAIRY));
+        if (gameRules.getBoolean(ALLOW_OWNER_HURT_FAIRY)) return;
+        System.out.println("Canceled!");
+        event.setCanceled(true);
     }
 
     @SubscribeEvent

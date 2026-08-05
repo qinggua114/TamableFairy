@@ -39,6 +39,7 @@ public class TameHandler {
             if (event.getItemStack().is(Items.CAKE)) {
                 tameData.setTamed(true);
                 tameData.setOwner(player.getUUID());
+                tameData.setOwnerName(player.getDisplayName().getString());
                 ModifyAI.letTamed((EntityFairy) target);
                 NetWorks.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> target),
                         new TameDataSyncPacket(target.getId(), tameData.tamed(), player.getUUID()));

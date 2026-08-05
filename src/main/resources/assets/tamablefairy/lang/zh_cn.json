@@ -9,5 +9,6 @@
   "btn.enable_follow": "跟随主人：%s",
   "btn.enable_move_around": "游荡：%s",
   "slider.follow_range": "跟随距离：§e%s",
-  "slider.move_range": "活动范围：§e%s"
+  "slider.move_range": "活动范围：§e%s",
+  "tooltip.owner": "主人：%s"
 }

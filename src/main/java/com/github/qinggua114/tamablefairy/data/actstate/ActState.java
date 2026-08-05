@@ -54,6 +54,11 @@ public class ActState implements IActState, INBTSerializable<CompoundTag> {
     }
 
     @Override
+    public void setActRangeCenter(Vec3 actRangeCenter) {
+        this.actRangeCenter = actRangeCenter;
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         CompoundTag tempTag = new CompoundTag();
         tempTag.putString(TagKeys.ATTACK_MODE, attackMode.getSerializedName());

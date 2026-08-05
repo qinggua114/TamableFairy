@@ -7,7 +7,11 @@ public interface ITameData {
 
     UUID owner();
 
+    String ownerName();
+
     void setTamed(boolean tamed);
 
     void setOwner(UUID owner);
+
+    void setOwnerName(String playerName);
 }

@@ -46,6 +46,8 @@ public class FairyOwnerHurtTargetGoal extends TargetGoal {
                 return false;//同一个主人的女仆妖精不会内斗
         }
 
+        if (lastHurt.equals(owner)) return false;//防止主人被自己打到然后被围殴（虽然没有伤害）
+
         return lastHurt != mob && !(lastHurt instanceof EntityMaid) && lastHurt.isAlive();//确保lastHurt不是自己和女仆,且未死亡
     }
 

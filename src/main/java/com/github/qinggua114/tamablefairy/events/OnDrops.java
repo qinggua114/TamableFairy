@@ -14,7 +14,7 @@ import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class OnDrops {
-    public OnDrops(){
+    public OnDrops() {
     }
 
     @SubscribeEvent
@@ -25,12 +25,12 @@ public class OnDrops {
         if (!source.getClass().equals(EntityFairy.class)) return;
         if (!source.getCapability(TAME_DATA).orElse(new TameData()).tamed()) return;
 
-        dropPowerPoint(event.getEntity(), ((EntityFairy)source).getPowerPoint());
+        dropPowerPoint(event.getEntity(), ((EntityFairy) source).getPowerPoint());
     }
 
     public static void dropPowerPoint(LivingEntity entity, int powerPointCount) {
         if (!entity.level().isClientSide) {
-            while(powerPointCount > 0) {
+            while (powerPointCount > 0) {
                 int powerSplit = EntityPowerPoint.getPowerValue(powerPointCount);
                 powerPointCount -= powerSplit;
                 EntityPowerPoint powerPoint = new EntityPowerPoint(entity.level(), entity.getX(), entity.getY(), entity.getZ(), powerSplit);

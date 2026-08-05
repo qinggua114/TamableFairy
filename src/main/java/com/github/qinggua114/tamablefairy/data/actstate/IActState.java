@@ -23,4 +23,6 @@ public interface IActState {
                  int moveRange,
                  Vec3 actRangeCenter
     );
+
+    void setActRangeCenter(Vec3 actRangeCenter);
 }

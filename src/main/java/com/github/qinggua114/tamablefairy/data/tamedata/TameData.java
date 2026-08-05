@@ -10,6 +10,8 @@ public class TameData implements ITameData, INBTSerializable<CompoundTag> {
     private boolean tamed = false;
     private UUID owner = null;
 
+    private String ownerName = null;
+
     public TameData() {
     }
 
@@ -24,6 +26,11 @@ public class TameData implements ITameData, INBTSerializable<CompoundTag> {
     }
 
     @Override
+    public String ownerName() {
+        return ownerName;
+    }
+
+    @Override
     public void setTamed(boolean _tamed) {
         tamed = _tamed;
     }
@@ -34,11 +41,18 @@ public class TameData implements ITameData, INBTSerializable<CompoundTag> {
     }
 
     @Override
+    public void setOwnerName(String _playerName){
+        ownerName = _playerName;
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         CompoundTag tempTag = new CompoundTag();
         tempTag.putBoolean("tamed", tamed);
         if (owner != null)
             tempTag.putUUID("owner", owner);
+        if (ownerName != null)
+            tempTag.putString("owner_name", ownerName);
         return tempTag;
     }
 
@@ -49,5 +63,9 @@ public class TameData implements ITameData, INBTSerializable<CompoundTag> {
             this.owner = compoundTag.getUUID("owner");
         else
             this.owner = null;
+        if (compoundTag.contains("owner_name"))
+            this.ownerName = compoundTag.getString("owner_name");
+        else
+            ownerName = null;
     }
 }

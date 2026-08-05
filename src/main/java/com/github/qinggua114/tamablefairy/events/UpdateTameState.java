@@ -12,8 +12,8 @@ import net.minecraftforge.fml.common.Mod;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
 
 @Mod.EventBusSubscriber
-public class TameStateUpdate {
-    public TameStateUpdate() {
+public class UpdateTameState {
+    public UpdateTameState() {
     }
 
     @SubscribeEvent
