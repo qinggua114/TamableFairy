@@ -81,6 +81,7 @@ public class ActStateSyncPacket {
     public static void handler(ActStateSyncPacket packet, Supplier<NetworkEvent.Context> ctx) {
         if (!ctx.get().getDirection().getReceptionSide().isClient()) return;
         ctx.get().enqueueWork(() -> clientHandler(packet));
+        ctx.get().setPacketHandled(true);
     }
 
     @OnlyIn(Dist.CLIENT)

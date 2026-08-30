@@ -7,12 +7,15 @@ import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.UUID;
 
 import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
@@ -41,6 +44,33 @@ public class DamageEvents {
         if (!(tameData.owner().equals(sourceData.owner()))) return;
 
         event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void onMaidDamage(LivingAttackEvent event) {
+        //若是同一主人的女仆妖精和已驯服的生物，则忽略伤害
+        LivingEntity entity = event.getEntity();
+        Entity source = event.getSource().getEntity();
+        if (source == null) return;
+
+        if (CheckTameState.isTamedFairy(entity)) {
+            if (source instanceof TamableAnimal) {
+                UUID sourceOwnerId = ((TamableAnimal) source).getOwnerUUID();
+                if (sourceOwnerId == null) return;
+                if (sourceOwnerId.equals(CheckTameState.getOwnerID((EntityFairy) entity))) event.setCanceled(true);
+                if (((TamableAnimal) source).getTarget() == null) return;
+                if (!((TamableAnimal) source).getTarget().equals(entity)) event.setCanceled(true);
+            }
+        }
+        if (entity instanceof TamableAnimal) {
+            if (CheckTameState.isTamedFairy(source)) {
+                UUID entityOwnerId = ((TamableAnimal) entity).getOwnerUUID();
+                if (entityOwnerId == null) return;
+                if (entityOwnerId.equals(CheckTameState.getOwnerID((EntityFairy) source))) event.setCanceled(true);
+                if (((EntityFairy) source).getTarget() == null) return;
+                if (!((EntityFairy) source).getTarget().equals(entity)) event.setCanceled(true);
+            }
+        }
     }
 
     @SubscribeEvent

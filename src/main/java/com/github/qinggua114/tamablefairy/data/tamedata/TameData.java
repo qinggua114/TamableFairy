@@ -41,7 +41,7 @@ public class TameData implements ITameData, INBTSerializable<CompoundTag> {
     }
 
     @Override
-    public void setOwnerName(String _playerName){
+    public void setOwnerName(String _playerName) {
         ownerName = _playerName;
     }
 

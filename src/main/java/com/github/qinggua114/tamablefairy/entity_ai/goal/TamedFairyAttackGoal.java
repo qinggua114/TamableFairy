@@ -2,7 +2,9 @@ package com.github.qinggua114.tamablefairy.entity_ai.goal;
 
 import com.github.qinggua114.tamablefairy.data.actstate.ActState;
 import com.github.qinggua114.tamablefairy.data.actstate.IActState;
+import com.github.qinggua114.tamablefairy.data.fairy_enchantments.FairyEnchsEnum;
 import com.github.qinggua114.tamablefairy.data.tamedata.TameData;
+import com.github.qinggua114.tamablefairy.utils.CheckFairyEnchs;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
+import java.util.Map;
 
 import static com.github.qinggua114.tamablefairy.data.Capabilities.ACT_STATE;
 import static com.github.qinggua114.tamablefairy.data.Capabilities.TAME_DATA;
@@ -22,11 +25,13 @@ public class TamedFairyAttackGoal extends Goal {
     private final double speedIn;
     private Path path;
     private int withInRangeTime;
+    Map<FairyEnchsEnum, Integer> fairyEnchs;
 
     public TamedFairyAttackGoal(EntityFairy entityFairy, double minDistance, double speedIn) {
         this.entityFairy = entityFairy;
         this.minDistance = minDistance;
         this.speedIn = speedIn;
+        this.fairyEnchs = CheckFairyEnchs.getFairyEnchs(entityFairy);
         this.setFlags(EnumSet.of(Flag.TARGET));
     }
 
@@ -59,7 +64,7 @@ public class TamedFairyAttackGoal extends Goal {
                 Vec3 motion = this.entityFairy.getDeltaMovement();
                 this.entityFairy.setDeltaMovement(motion.x, 0.0F, motion.z);
                 this.entityFairy.setNoGravity(true);
-                if (this.withInRangeTime > MAX_WITH_IN_RANGE_TIME) {
+                if (this.withInRangeTime > getMaxWithInRangeTime(fairyEnchs.getOrDefault(FairyEnchsEnum.QUICK_CHARGE, 0), MAX_WITH_IN_RANGE_TIME)) {
                     float percent = (float) (distance / this.minDistance);
                     this.entityFairy.m_6504_(target, 1.0F - percent);
                     this.withInRangeTime = 0;
@@ -85,5 +90,9 @@ public class TamedFairyAttackGoal extends Goal {
         this.entityFairy.setTarget(null);
         this.entityFairy.getNavigation().stop();
         this.withInRangeTime = 0;
+    }
+
+    private int getMaxWithInRangeTime(int quickChargeEnchLevel, int original) {
+        return original - quickChargeEnchLevel * 5;
     }
 }

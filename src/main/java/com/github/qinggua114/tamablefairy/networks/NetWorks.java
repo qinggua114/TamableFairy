@@ -9,7 +9,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.util.Optional;
 
 public class NetWorks {
-    public static final String NETWORK_VERSION = "2.0";
+    public static final String NETWORK_VERSION = "3.0";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(TamableFairy.MODID, "main"),
             () -> NETWORK_VERSION,
@@ -36,6 +36,13 @@ public class NetWorks {
                 ActStateSyncPacket::encode,
                 ActStateSyncPacket::decode,
                 ActStateSyncPacket::handler,
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+
+        CHANNEL.registerMessage(3, FairyEnchsSyncPacket.class,
+                FairyEnchsSyncPacket::encode,
+                FairyEnchsSyncPacket::decode,
+                FairyEnchsSyncPacket::handler,
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
     }

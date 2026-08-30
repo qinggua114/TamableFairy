@@ -2,6 +2,7 @@ package com.github.qinggua114.tamablefairy.data;
 
 
 import com.github.qinggua114.tamablefairy.data.actstate.IActState;
+import com.github.qinggua114.tamablefairy.data.fairy_enchantments.IFairyEnchs;
 import com.github.qinggua114.tamablefairy.data.tamedata.ITameData;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -18,6 +19,8 @@ public class Capabilities {
     });
     public static final Capability<IActState> ACT_STATE = CapabilityManager.get(new CapabilityToken<>() {
     });
+    public static final Capability<IFairyEnchs> FAIRY_ENCHS = CapabilityManager.get(new CapabilityToken<>() {
+    });
 
     public Capabilities() {
     }
@@ -26,6 +29,7 @@ public class Capabilities {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.register(ITameData.class);
         event.register(IActState.class);
+        event.register(IFairyEnchs.class);
     }
 
 }

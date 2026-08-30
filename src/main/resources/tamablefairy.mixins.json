@@ -6,7 +6,9 @@
   "refmap": "tamablefairy.refmap.json",
   "mixins": [
     "AllowPlayerResting",
-    "EnableLeashing"
+    "EnableLeashing",
+    "ModifyAttack",
+    "ModifyDanmaku"
   ],
   "client": [],
   "server": []

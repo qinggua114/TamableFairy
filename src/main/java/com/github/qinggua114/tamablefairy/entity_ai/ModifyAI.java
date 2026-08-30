@@ -1,6 +1,7 @@
 package com.github.qinggua114.tamablefairy.entity_ai;
 
 import com.github.qinggua114.tamablefairy.entity_ai.goal.*;
+import com.github.tartaricacid.touhoulittlemaid.entity.ai.goal.FairyAttackGoal;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -30,7 +31,8 @@ public class ModifyAI {
         List<WrappedGoal> goals = new ArrayList<>(fairy.goalSelector.getAvailableGoals());
         for (WrappedGoal goal : goals) {
             if (goal.getGoal() instanceof MoveTowardsRestrictionGoal ||
-                    goal.getGoal() instanceof RandomStrollGoal) {
+                    goal.getGoal() instanceof RandomStrollGoal ||
+                    goal.getGoal() instanceof FairyAttackGoal) {
                 fairy.goalSelector.removeGoal(goal.getGoal());
             }
         }
@@ -39,6 +41,10 @@ public class ModifyAI {
         fairy.goalSelector.addGoal(1, new FairyFollowOwnerGoal(fairy, 1, 5, true, 16));
         //新的随机移动Goal
         fairy.goalSelector.addGoal(3, new FairyRandomStrollGoal(fairy, 1));
+        //修改过的攻击Goal
+        fairy.goalSelector.addGoal(2, new TamedFairyAttackGoal(fairy, 8, 1));
+        //Healing配套的生命值恢复Goal
+        fairy.goalSelector.addGoal(10, new FairyHealGoal(fairy));
 
         //攻击主人的目标
         fairy.targetSelector.addGoal(1, new FairyOwnerHurtByTargetGoal(fairy));
@@ -46,7 +52,6 @@ public class ModifyAI {
         //主动攻击
         fairy.targetSelector.addGoal(2, new FairyNearestEnemyTargetGoal(fairy));
 
-        //更改属性,稍微加强一点,要不太不抗揍了
         AttributeInstance armor = fairy.getAttribute(Attributes.ARMOR);
         if (armor != null) armor.setBaseValue(5);
         AttributeInstance maxHealth = fairy.getAttribute(Attributes.MAX_HEALTH);

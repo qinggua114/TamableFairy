@@ -6,13 +6,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import snownee.jade.api.*;
-
+import snownee.jade.api.EntityAccessor;
+import snownee.jade.api.IEntityComponentProvider;
+import snownee.jade.api.IServerDataProvider;
+import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
 import static com.github.qinggua114.tamablefairy.TamableFairy.MODID;
 
-public enum OwnerNameProvider implements IEntityComponentProvider, IServerDataProvider<EntityAccessor>{
+public enum OwnerNameProvider implements IEntityComponentProvider, IServerDataProvider<EntityAccessor> {
     INSTANCE;
 
     @Override

@@ -90,6 +90,8 @@ public class C2SFairyGuiPacket {
                     PacketDistributor.TRACKING_ENTITY.with(() -> entity),
                     new ActStateSyncPacket(entity.getId(), actState)
             );
+
+            ctx.get().setPacketHandled(true);
         });
     }
 }
