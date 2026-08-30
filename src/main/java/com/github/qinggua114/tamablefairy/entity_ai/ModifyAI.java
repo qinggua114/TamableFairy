@@ -43,6 +43,8 @@ public class ModifyAI {
         fairy.goalSelector.addGoal(3, new FairyRandomStrollGoal(fairy, 1));
         //修改过的攻击Goal
         fairy.goalSelector.addGoal(2, new TamedFairyAttackGoal(fairy, 8, 1));
+        //Healing配套的生命值恢复Goal
+        fairy.goalSelector.addGoal(10, new FairyHealGoal(fairy));
 
         //攻击主人的目标
         fairy.targetSelector.addGoal(1, new FairyOwnerHurtByTargetGoal(fairy));
@@ -50,7 +52,6 @@ public class ModifyAI {
         //主动攻击
         fairy.targetSelector.addGoal(2, new FairyNearestEnemyTargetGoal(fairy));
 
-        //更改属性,稍微加强一点,要不太不抗揍了
         AttributeInstance armor = fairy.getAttribute(Attributes.ARMOR);
         if (armor != null) armor.setBaseValue(5);
         AttributeInstance maxHealth = fairy.getAttribute(Attributes.MAX_HEALTH);

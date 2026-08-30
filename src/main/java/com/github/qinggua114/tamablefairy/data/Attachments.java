@@ -1,6 +1,7 @@
 package com.github.qinggua114.tamablefairy.data;
 
 import com.github.qinggua114.tamablefairy.TamableFairy;
+import com.github.qinggua114.tamablefairy.data.fairy_enchs.FairyEnchs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -13,6 +14,7 @@ public class Attachments {
     }
 
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, TamableFairy.MODID);
+
     public static final Supplier<AttachmentType<TameData>> TAME_DATA =
             ATTACHMENT_TYPES.register("tame_data",
                     () -> AttachmentType.builder(() -> TameData.EMPTY)
@@ -26,6 +28,14 @@ public class Attachments {
                     () -> AttachmentType.builder(() -> ActState.DEFAULT)
                             .serialize(ActState.CODEC)
                             .sync(ActState.STREAM_CODEC)
+                            .build()
+            );
+
+    public static final Supplier<AttachmentType<FairyEnchs>> FAIRY_ENCHS =
+            ATTACHMENT_TYPES.register("fairy_enchs",
+                    () -> AttachmentType.builder(() -> FairyEnchs.EMPTY)
+                            .serialize(FairyEnchs.CODEC)
+                            .sync(FairyEnchs.STREAM_CODEC)
                             .build()
             );
 

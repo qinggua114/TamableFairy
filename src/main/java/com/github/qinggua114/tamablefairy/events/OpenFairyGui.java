@@ -5,8 +5,6 @@ import com.github.qinggua114.tamablefairy.gui.FairyMenuProvider;
 import com.github.tartaricacid.touhoulittlemaid.entity.monster.EntityFairy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -29,12 +27,7 @@ public class OpenFairyGui {
         Player player = event.getEntity();
         if (!(player.getUUID().equals(tameData.owner()))) return;
 
-        ItemStack mainHand = player.getMainHandItem();
-        ItemStack offHand = player.getOffhandItem();
-        if (mainHand.is(Items.CAKE) || mainHand.is(Items.SUGAR) ||
-                offHand.is(Items.CAKE) || offHand.is(Items.SUGAR)) {
-            return;
-        }
+        if (!player.isShiftKeyDown()) return;
 
         player.openMenu(new FairyMenuProvider((EntityFairy) target),
                 (byteBuf) -> byteBuf.writeInt(target.getId()));

@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AllowPlayerResting",
-    "EnableLeashing"
+    "EnableLeashing",
+    "ModifyAttack",
+    "ModifyDanmaku"
   ],
   "client": [
   ],
